@@ -2,7 +2,7 @@
  Major: 0   
  Minor: 1   
  Patch: 1   
- Build: 36691   
+ Build: 43611   
 Suffix: alpha 
 
 This file is generated automatically with each build. 
@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Windows;
 
 [assembly: AssemblyVersion("0.1")]
-[assembly: AssemblyFileVersion("0.1.1.36691")]
+[assembly: AssemblyFileVersion("0.1.1.43611")]
 [assembly: AssemblyInformationalVersion("0.1.1-alpha")]
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
