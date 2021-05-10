@@ -1,0 +1,69 @@
+﻿﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ import namespace="System.IO" #>
+<#@ output extension=".cs" #>
+<#
+	int major = 0;
+	int minor = 0;
+	int patch = 0;
+	int build = 0;
+	
+	string suffix = "";
+
+	try
+	{
+		using(var f = File.OpenText(Host.ResolvePath("Version.txt")))
+		{
+			string date = f.ReadLine();
+			DateTime startDate = DateTime.Parse(date);
+
+			string version = f.ReadLine();
+			string maj = version.Split('.')[0];
+			string min = version.Split('.')[1];
+			
+			major = int.Parse(maj); 
+			minor = int.Parse(min); 
+			patch = DateTime.Today.Subtract(startDate).Days;
+			
+			float factor = (float)(UInt16.MaxValue - 1) / (24 * 60 * 60);
+			
+			build = (int)(DateTime.Now.TimeOfDay.TotalSeconds * factor);
+		}
+
+		using(var f = File.OpenText(Host.ResolvePath("VersionSuffix.txt")))
+		{
+			suffix = f.ReadLine().Trim();
+		}
+	}
+	catch
+	{
+		major = 1;
+		minor = 0;
+		patch = 0;
+		build = 0;
+	}
+#>
+/*
+ Major: <#= major #>   
+ Minor: <#= minor #>   
+ Patch: <#= patch #>   
+ Build: <#= build #>   
+Suffix: <#= suffix #> 
+
+This file is generated automatically with each build. 
+Any changes made manually will be lost with the next build.
+*/
+
+using System.Reflection;
+using System.Windows;
+
+[assembly: AssemblyVersion("<#= major #>.<#= minor #>")]
+[assembly: AssemblyFileVersion("<#= major #>.<#= minor #>.<#= patch #>.<#= build #>")]
+[assembly: AssemblyInformationalVersion("<#= major #>.<#= minor #>.<#= patch #>-<#= suffix #>")]
+[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
+                                     //(used if a resource is not found in the page,
+                                     // or application resource dictionaries)
+    ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
+                                              //(used if a resource is not found in the page,
+                                              // app, or any theme specific resource dictionaries)
+)]
