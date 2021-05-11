@@ -1,0 +1,28 @@
+﻿<Page x:Class="Seemon.Vault.Views.LicensePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converter="clr-namespace:Seemon.Vault.Helpers.Converters"
+      xmlns:local="clr-namespace:Seemon.Vault.Views"
+      Style="{DynamicResource MahApps.Styles.Page}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="550"
+      Title="License" FontFamily="Consolas">
+    <StackPanel Width="550" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock DockPanel.Dock="Top" Margin="5" TextWrapping="Wrap" Padding="5">
+            <Bold><Hyperlink Command="{Binding OpenInBrowserCommand}">Vault</Hyperlink></Bold> is an open source project published under the MIT License. You can view the source code and contribute to this project on <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="https://github.com/mattseemon/Vault">GitHub</Hyperlink>.
+        </TextBlock>
+        <TextBlock Text="{Binding Lines, Converter={converter:ListToStringConverter}}" Margin="5 0 5 5" TextWrapping="WrapWithOverflow" Padding="5" TextAlignment="Justify"></TextBlock>
+        <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Grid.Column="0" Margin="5" Padding="5">
+                <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="3rdParty">3rd Party Licenses and Open Source Notices</Hyperlink>
+            </TextBlock>
+        </Grid>
+        
+    </StackPanel>
+</Page>

@@ -1,0 +1,35 @@
+﻿<mah:MetroWindow x:Class="Seemon.Vault.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ip="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:Seemon.Vault"
+        mc:Ignorable="d"
+        Title="{Binding PageTitle}" Height="768" Width="1024" MinHeight="768" MinWidth="1024" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <mah:MetroWindow.LeftWindowCommands>
+        <mah:WindowCommands>
+            <Button ToolTip="Go back" Content="{ip:Material Kind=ArrowLeft}" Command="{Binding GoBackCommand}" />
+        </mah:WindowCommands>
+    </mah:MetroWindow.LeftWindowCommands>
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button ToolTip="Open PGP Key Ring" Content="{ip:Material Kind=KeyChain}" />
+            <Button ToolTip="Open Settings" Content="{ip:Material Kind=CogOutline}" Command="{Binding ShowSettingsCommand}" />
+            <Button ToolTip="Show About" Content="{ip:Material Kind=InformationOutline}" Command="{Binding ShowAboutCommand}"/>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+    <mah:MetroWindow.Content>
+        <Frame x:Name="shellFrame" Focusable="False" NavigationUIVisibility="Hidden"/>
+    </mah:MetroWindow.Content>
+</mah:MetroWindow>

@@ -15,6 +15,7 @@ namespace Seemon.Vault.Core.Services
                 var json = File.ReadAllText(path);
                 return JsonConvert.DeserializeObject<T>(json);
             }
+
             return default;
         }
 

@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A0BBBCE0-2D78-4E6E-B1A8-967713A98FAC}"
 	ProjectSection(SolutionItems) = preProject
 		..\3rd-Party-Notices.md = ..\3rd-Party-Notices.md
+		..\CHANGELOG.md = ..\CHANGELOG.md
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
 	EndProjectSection

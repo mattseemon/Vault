@@ -9,6 +9,5 @@ namespace Seemon.Vault.Core.Contracts.Services
         void SetTheme(ApplicationTheme theme);
 
         ApplicationTheme GetCurrentTheme();
-
     }
 }

@@ -1,0 +1,148 @@
+﻿<Page x:Class="Seemon.Vault.Views.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converters="clr-namespace:Seemon.Vault.Helpers.Converters"
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:controls="using:Microsoft.Too"
+      xmlns:local="clr-namespace:Seemon.Vault.Views"
+      mc:Ignorable="d" 
+      Style="{DynamicResource MahApps.Styles.Page}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Settings">
+    <Page.Resources>
+        <Style x:Key="DefaultTabControlItem" TargetType="{x:Type TabControl}">
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabControl">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" BorderBrush="{StaticResource MahApps.Brushes.Accent3}" BorderThickness="0 .5 0 0">
+                                <StackPanel >
+                                    <!--Allow to host the tabitem header within the first row of the grid -->
+                                    <TabPanel IsItemsHost="True"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="0" Grid.Column="1" 
+                                BorderBrush="{StaticResource MahApps.Brushes.Accent3}" 
+                                BorderThickness=".5 .5 0 0" 
+                                SnapsToDevicePixels="True">
+                                <!--Using ContentSource set to SelectedContent we will focus the content of the tabitem -->
+                                <ContentPresenter ContentSource="SelectedContent" Margin="5 0 0 0"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DefaultTabItem" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Name="Border" Margin="0,0" MinWidth="150" Width="200" Padding="15 10" >
+                            <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource MahApps.HamburgerMenu.Pane.Foreground}" />
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MahApps.Brushes.Badged.Background}" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MahApps.Brushes.Badged.Background}" />
+                                <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="{DynamicResource MahApps.HamburgerMenu.Pane.Foreground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <DockPanel LastChildFill="True">
+        <TabControl Margin="10" TabStripPlacement="Left" Padding="0" Style="{StaticResource DefaultTabControlItem}" ItemContainerStyle="{StaticResource DefaultTabItem}">
+            <TabItem Header="GENERAL">
+                <StackPanel Width="500" HorizontalAlignment="Left">
+                    <GroupBox Header="Appearance" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Content="Choose theme:" />
+                            <ComboBox Grid.Row="0" Grid.Column="1"  ItemsSource="{Binding Theme.Base, Converter={converters:EnumToCollectionConverter}, Mode=OneTime}" 
+                                              SelectedValuePath="Value" DisplayMemberPath="Description" SelectedValue="{Binding Theme.Base}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="Theme" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <Label Grid.Row="1" Grid.Column="0" Margin="0 5 0 0" Content="Choose accent:" />
+                            <ComboBox Grid.Row="1" Grid.Column="1"  Margin="0 5 0 0" ItemsSource="{Binding AccentColors}" SelectedValuePath="Name" SelectedValue="{Binding Theme.Accent}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="Theme" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Border BorderThickness="0" Height="20" Width="20" Margin="0 0 5 0" Background="{Binding ColorBrush}"/>
+                                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Margin="0 5 0 0" Header="System">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <CheckBox Grid.Row="0" Grid.Column="0" Margin="0 0 0 5" Content="Start Vault with Windows" IsChecked="{Binding System.StartWithWindows}" />
+                            <CheckBox Grid.Row="0" Grid.Column="1" Margin="0 0 0 5" Content="Always on top" IsChecked="{Binding System.AlwaysOnTop}" />
+                            <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 0 0 5" Content="Show Vault in notification area" IsChecked="{Binding System.ShowVaultInNotificationArea}" />
+                            <CheckBox Grid.Row="2" Grid.Column="0" Margin="0 0 0 0" Content="Minimize to notification area" IsChecked="{Binding System.MinimizeToNotificationArea}" IsEnabled="{Binding System.ShowVaultInNotificationArea}" />
+                            <CheckBox Grid.Row="2" Grid.Column="1" Margin="0 0 0 0" Content="Close to notification area" IsChecked="{Binding System.CloseToNotificationArea}" IsEnabled="{Binding System.ShowVaultInNotificationArea}" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Clipboard" Margin="0 5 0 0">
+                        <StackPanel>
+                            <ComboBox ItemsSource="{Binding Clipboard.Copy, Converter={converters:EnumToCollectionConverter}, Mode=OneTime}" 
+                                              SelectedValuePath="Value" DisplayMemberPath="Description" SelectedValue="{Binding Clipboard.Copy}" />
+                            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                <CheckBox Content="Auto clear after" IsChecked="{Binding Clipboard.AutoClear}" />
+                                <mah:NumericUpDown Margin="5 0 0 0" Minimum="5" Maximum="300" Width="75" Value="{Binding Clipboard.AutoClearDuration}" IsEnabled="{Binding Clipboard.AutoClear}" HorizontalContentAlignment="Right" SwitchUpDownButtons="True" />
+                                <Label Content="seconds"  />
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        
+    </DockPanel>
+</Page>

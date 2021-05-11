@@ -5,14 +5,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.1.1-alpha] - 2021-05-10
-1. Created Solution & Base Projects
-	- Vault-Core - Vault Core Library
-	- Vault-UX - Vault User Experience
-2. Implemented Versioning Strategy
-3. Included Project Assets (Icons, PNG, etc)
-4. Updated README.md
-5. Created 3rd-Party-Notices.md
-6. Created CHANGELOG.md
-7. Added Core Service Contracts & Services
-    - Contracts for ActivationHandler, ApplicationInfoService, FileService, DataService, NavigationService, PageService, SystemService, ThemeSelectorService, NavigationAware pages, ShellWindow
-    - FileService &  SystemService
+
+### Added
+	1. Solution & Base Projects
+		- Vault-Core - Vault Core Library
+		- Vault-UX - Vault User Experience
+	2. Implemented combined versioning strategy for all projects.
+	3. Included Project Assets (Icons, PNG, etc)
+	4. 3rd-Party-Notices.md - Full list of all packages used and licenses information 
+	5. CHANGELOG.md
+	6. Core Service Contracts
+		- Contracts for ActivationHandler, ApplicationInfoService, FileService, DataService, NavigationService, PageService, SystemService, ThemeSelectorService, NavigationAware pages, ShellWindow
+	7. Core Services
+		- FileService - Service class for file operations.
+		- SystemService - Service class for OS operations.
+
+### Updated
+	1. README.md - Updated with project details.
+
+## [0.1.2-alpha] - 2021-05-11
+
+### Added
+	1. Services
+		- ApplicationHostService - Service class for core hosting and starting infrastructure for the application.
+		- ApplicationInfoService - Service class for application information.
+		- DataService - Service class for loading and saving application data. Uses FileService to read and write to files.
+		- NavigationService - Service class handling the UI navigation between pages provided by the PageService.
+		- PageService - Service class providing the pages used by the navigation service.
+		- SettingService - Service class managing the application settings. Uses data services to load and save.
+		- ThemeSelectorService - Service class for setting the application theme and accent colors.
+	2. Views/Pages
+		- WelcomePage - Landing page when the application starts.
+		- AboutPage - Displays information about the application.
+		- LicensePage - Displayes license information about the application.
+		- SettingsPage - Page to manage the application settings.
+	3. ViewModels for the pages
+	4. Models
+		- ClipboardSettings, SystemSettings - models for application settings
+		- ApplicationTheme - Model for application theme
+		- ApplicationConfig - Model for application configuration file. Application configuration is uses to store fixed settings like, setting file location and application urls
+	5. Helper Classes like converters, extensions and constants.

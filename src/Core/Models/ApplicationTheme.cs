@@ -1,8 +1,11 @@
 ﻿using System;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Seemon.Vault.Core.Models
 {
-    public class ApplicationTheme
+    public class ApplicationTheme : ObservableObject
     {
         public enum ThemeBase
         {
@@ -11,9 +14,36 @@ namespace Seemon.Vault.Core.Models
             Light
         }
 
-        public static ApplicationTheme Default = new ApplicationTheme("System.System");
+        private ThemeBase _base;
+        private string _accent;
 
-        public ApplicationTheme(string themeInfo)
+        [JsonConstructor()]
+        public ApplicationTheme() { }
+
+        [JsonProperty("base")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ThemeBase Base 
+        {
+            get => _base;
+            set => SetProperty(ref _base, value); 
+        }
+
+        [JsonProperty("accent")]
+        public string Accent 
+        { 
+            get => _accent; 
+            set => SetProperty(ref _accent, value); 
+        }
+
+        public override string ToString() => $"{Base}.{Accent}";
+
+        public override bool Equals(object obj) => string.Equals(ToString(), obj.ToString());
+
+        public override int GetHashCode() => ToString().GetHashCode();
+
+        public static ApplicationTheme Default = Parse("System.System");
+
+        public static ApplicationTheme Parse(string themeInfo)
         {
             var infos = themeInfo.Split(".");
             if (infos.Length != 2)
@@ -22,18 +52,11 @@ namespace Seemon.Vault.Core.Models
             }
             Enum.TryParse(infos[0], out ThemeBase themeBase);
 
-            Base = themeBase;
-            Accent = infos[1];
+            return new ApplicationTheme
+            {
+                Base = themeBase,
+                Accent = infos[1]
+            };
         }
-
-        public ThemeBase Base { get; set; }
-
-        public string Accent { get; set; }
-
-        public override string ToString() => $"{Base}.{Accent}";
-
-        public override bool Equals(object obj) => string.Equals(ToString(), obj.ToString());
-
-        public override int GetHashCode() => ToString().GetHashCode();
     }
 }
