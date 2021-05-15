@@ -61,7 +61,7 @@ VAULT was developed using the below tools and technologies.
  Library | Version 
  ------- | -------
 [Newtonsoft.Json](http://james.newtonking.com/projects/json-net.aspx)|13.0.1
-[MahApps.Metro)](https://github.com/MahApps/MahApps.Metro)|2.4.5
+[MahApps.Metro](https://github.com/MahApps/MahApps.Metro)|2.4.5
 [MahApps.Metro.IconPacks.Material](https://github.com/MahApps/MahApps.Metro.IconPacks)|4.8.0
 [Microsoft.Extensions.Hosting](https://github.com/dotnet/runtime)|5.0.0
 [Microsoft.Toolkit.Mvvm](https://github.com/windows-toolkit/WindowsCommunityToolkit)|7.0.2
