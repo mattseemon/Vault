@@ -54,6 +54,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 		- Added a Model class to access it.
 	3. Added Models for the following settings. 
 		- PGP, Git, PasswordGeneration, Security, Update, Profile
+	4. Added IWindow, ICloseable, IViewModel, ITaskbarInfoService, IWindowManagerService contracts.
+	5. Implemented ThemeChanger, TaskbarIcon, AutoStart, AlwaysOnTop settings logic. 
+	6. Did some refactoring and code reformatting
 
 ### Added
 	1. Services
@@ -63,3 +66,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 		- ProfileWindow - GUI to add or edit profile properties.
 	3. ViewModels
 		- ProfileViewModel & TaskbarIconViewModel
+	5. Helper classes
+		- WindowBase - Base class for windows. Shared/common functionality is implemented here. 
+		- ViewModelBase - Base class for view models. Shared/common functionality is implemented here.
+	6. Additional Extensions, converter and validators were added. 
+
+### Changed
+	1. Minor changes were made to all files as part of refactoring and code formatting.
+	2. Updated Microsoft Toolkit to 7.0.2
+	3. Updated CHANGELOG.md, 3rd-Party-Notices.md, README.md
