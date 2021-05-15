@@ -17,18 +17,15 @@ namespace Seemon.Vault.Helpers.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var str = value as string;
-            if (str.IsNotNull())
-            {
-                return this.Case switch
+            return str.IsNotNull()
+                ? this.Case switch
                 {
                     CharacterCasing.Lower => str.ToLower(),
                     CharacterCasing.Normal => str,
                     CharacterCasing.Upper => str.ToUpper(),
                     _ => str,
-                };
-            }
-
-            return string.Empty;
+                }
+                : string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();

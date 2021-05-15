@@ -15,7 +15,12 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <ApplicationIcon>Assets\Vault.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Vault.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\Versioning\AssemblyInfo.cs" Link="AssemblyInfo.cs" />
@@ -34,11 +39,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.5" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.8.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Vault.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,36 +14,40 @@ namespace Seemon.Vault.Core.Models
         [JsonProperty("startWithWindows")]
         public bool StartWithWindows
         {
-            get => _startWithWindows;
-            set => SetProperty(ref _startWithWindows, value);
+            get => _startWithWindows; set => SetProperty(ref _startWithWindows, value);
         }
 
         [JsonProperty("alwaysOnTop")]
         public bool AlwaysOnTop
         {
-            get => _alwaysOnTop;
-            set => SetProperty(ref _alwaysOnTop, value);
+            get => _alwaysOnTop; set => SetProperty(ref _alwaysOnTop, value);
         }
 
         [JsonProperty("showVaultInNotificationArea")]
         public bool ShowVaultInNotificationArea
         {
-            get => _showVaultInNotificationArea;
-            set => SetProperty(ref _showVaultInNotificationArea, value);
+            get => _showVaultInNotificationArea; set => SetProperty(ref _showVaultInNotificationArea, value);
         }
 
         [JsonProperty("minimizeToNotificationArea")]
         public bool MinimizeToNotificationArea
         {
-            get => _minimizeToNotificationArea;
-            set => SetProperty(ref _minimizeToNotificationArea, value);
+            get => _minimizeToNotificationArea; set => SetProperty(ref _minimizeToNotificationArea, value);
         }
 
         [JsonProperty("closeToNotificationArea")]
         public bool CloseToNotificationArea
         {
-            get => _closeToNotificationArea;
-            set => SetProperty(ref _closeToNotificationArea, value);
+            get => _closeToNotificationArea; set => SetProperty(ref _closeToNotificationArea, value);
         }
+
+        public static SystemSettings Default => new() 
+        { 
+            StartWithWindows = false, 
+            AlwaysOnTop = false, 
+            ShowVaultInNotificationArea = false, 
+            MinimizeToNotificationArea = false, 
+            CloseToNotificationArea = false 
+        };
     }
 }

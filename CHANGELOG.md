@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	2. Views/Pages
 		- WelcomePage - Landing page when the application starts.
 		- AboutPage - Displays information about the application.
-		- LicensePage - Displayes license information about the application.
+		- LicensePage - Displays license information about the application.
 		- SettingsPage - Page to manage the application settings.
 	3. ViewModels for the pages
 	4. Models
@@ -45,3 +45,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 		- ApplicationTheme - Model for application theme
 		- ApplicationConfig - Model for application configuration file. Application configuration is uses to store fixed settings like, setting file location and application urls
 	5. Helper Classes like converters, extensions and constants.
+
+## [0.1.5-alpha]
+
+### Summary
+	1. Added additional services to manage Windows, TaskbarIcon
+	2. Moved Application Urls to a separate section in the appSettings.json.
+		- Added a Model class to access it.
+	3. Added Models for the following settings. 
+		- PGP, Git, PasswordGeneration, Security, Update, Profile
+
+### Added
+	1. Services
+		- WindowManagerService - Service class for accessing open application windows
+		- TaskbarIconService = Service class for the creation, management and destruction of Taskbar Icon.
+	2. Windows/Pages
+		- ProfileWindow - GUI to add or edit profile properties.
+	3. ViewModels
+		- ProfileViewModel & TaskbarIconViewModel

@@ -10,10 +10,7 @@ namespace Seemon.Vault.Services
     {
         private readonly ISettingsService _settingsService;
 
-        public ThemeSelectorService(ISettingsService settingsService) 
-        {
-            _settingsService = settingsService;
-        }
+        public ThemeSelectorService(ISettingsService settingsService) => _settingsService = settingsService;
 
         public void InitializeTheme()
         {
@@ -48,7 +45,6 @@ namespace Seemon.Vault.Services
                     ThemeManager.Current.ChangeTheme(Application.Current, theme.ToString(), SystemParameters.HighContrast);
                 }
             }
-
             _settingsService.Set(Constants.SETTINGS_APPLICATION_THEME, theme);
         }
     }

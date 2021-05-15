@@ -8,30 +8,23 @@ namespace Seemon.Vault.Services
     {
         private Assembly _assembly = Assembly.GetExecutingAssembly();
 
-        public ApplicationInfoService() { }
-
         public string GetApplicationIdentifier() => $"Seemon.{GetTitle()}";
 
-        public string GetAuthor() => GetAssemblyAttribute<AssemblyCompanyAttribute>(_assembly)?.Company ?? "Matt Seemon";
+        public string GetAuthor() => GetAssemblyAttribute<AssemblyCompanyAttribute>()?.Company ?? "Matt Seemon";
 
-        public string GetCopyright() => GetAssemblyAttribute<AssemblyCopyrightAttribute>(_assembly)?.Copyright ?? "© Copyright 2021, Matt Seemon. All rights reserved.";
+        public string GetCopyright() => GetAssemblyAttribute<AssemblyCopyrightAttribute>()?.Copyright ?? "© Copyright 2021, Matt Seemon. All rights reserved.";
 
-        public string GetDescription() => GetAssemblyAttribute<AssemblyDescriptionAttribute>(_assembly)?.Description ?? "A file system based secrets repository, powered by OpenPGP.";
+        public string GetDescription() => GetAssemblyAttribute<AssemblyDescriptionAttribute>()?.Description ?? "A file system based secrets repository, powered by OpenPGP.";
 
-        public string GetTitle() => GetAssemblyAttribute<AssemblyTitleAttribute>(_assembly)?.Title ?? "Vault";
+        public string GetTitle() => GetAssemblyAttribute<AssemblyTitleAttribute>()?.Title ?? "Vault";
 
-        public string GetVersion() => GetAssemblyAttribute<AssemblyInformationalVersionAttribute>(_assembly)?.InformationalVersion ?? string.Empty;
+        public string GetVersion() => GetAssemblyAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? string.Empty;
 
-        public T GetAssemblyAttribute<T>(Assembly assembly) where T : Attribute
+        public T GetAssemblyAttribute<T>() where T : Attribute
         {
-            object[] attributes = assembly.GetCustomAttributes(typeof(T), true);
+            object[] attributes = _assembly.GetCustomAttributes(typeof(T), true);
 
-            if (attributes == null || attributes.Length == 0)
-            {
-                return null;
-            }
-
-            return (T)attributes[0];
+            return attributes == null || attributes.Length == 0 ? null : (T)attributes[0];
         }
     }
 }

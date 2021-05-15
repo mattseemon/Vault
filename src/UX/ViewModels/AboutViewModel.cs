@@ -1,16 +1,16 @@
 ﻿using Microsoft.Extensions.Options;
-using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
 using Seemon.Vault.Core.Models;
+using Seemon.Vault.Helpers;
 using System.Windows.Input;
 
 namespace Seemon.Vault.ViewModels
 {
-    public class AboutViewModel : ObservableObject, INavigationAware
+    public class AboutViewModel : ViewModelBase, INavigationAware
     {
-        private readonly ApplicationConfig _appConfig;
+        private readonly ApplicationUrls _appUrls;
         private readonly IApplicationInfoService _applicationInfoService;
         private readonly ISystemService _systemService;
         private readonly INavigationService _navigationService;
@@ -24,46 +24,41 @@ namespace Seemon.Vault.ViewModels
         private string _description;
         private string _copyright;
 
-        public string Title
+        public AboutViewModel(IOptions<ApplicationUrls> appUrls, IApplicationInfoService applicationInforService, ISystemService systemService, INavigationService navigationService)
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
-
-        public string Version
-        {
-            get { return $"Version {_version}"; }
-            set { SetProperty(ref _version, value); }
-        }
-
-        public string Author
-        {
-            get { return _author; }
-            set { SetProperty(ref _author, value); }
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
-        }
-
-        public string Copyright
-        {
-            get { return _copyright; }
-            set { SetProperty(ref _copyright, value); }
-        }
-
-        public ICommand OpenInBrowserCommand => _openInBrowserCommand ??= new RelayCommand<string>(OnOpenInBrowser);
-        public ICommand ShowLicenseCommand => _showLicenseCommand ??= new RelayCommand(OnShowLicense);
-
-        public AboutViewModel(IOptions<ApplicationConfig> appConfig, IApplicationInfoService applicationInforService, ISystemService systemService, INavigationService navigationService)
-        {
-            _appConfig = appConfig.Value;
+            _appUrls = appUrls.Value;
             _applicationInfoService = applicationInforService;
             _systemService = systemService;
             _navigationService = navigationService;
         }
+
+        public string Title
+        {
+            get => _title; set => SetProperty(ref _title, value);
+        }
+
+        public string Version
+        {
+            get => $"Version {_version}"; set => SetProperty(ref _version, value);
+        }
+
+        public string Author
+        {
+            get => _author; set => SetProperty(ref _author, value);
+        }
+
+        public string Description
+        {
+            get => _description; set => SetProperty(ref _description, value);
+        }
+
+        public string Copyright
+        {
+            get => _copyright; set => SetProperty(ref _copyright, value);
+        }
+
+        public ICommand OpenInBrowserCommand => _openInBrowserCommand ??= new RelayCommand<string>(OnOpenInBrowser);
+        public ICommand ShowLicenseCommand => _showLicenseCommand ??= new RelayCommand(OnShowLicense);
 
         public void OnNavigateTo(object parameter)
         {
@@ -78,14 +73,7 @@ namespace Seemon.Vault.ViewModels
 
         private void OnOpenInBrowser(string parameter)
         {
-            string url = string.Empty;
-            url = parameter switch
-            {
-                "source" => _appConfig.SourceCodeUrl,
-                "license" => _appConfig.LicenseUrl,
-                "credits" => _appConfig.CreditsUrl,
-                _ => _appConfig.ApplicationUrl
-            };
+            var url = _appUrls[parameter];
             _systemService.OpenInWebBrowser(url);
         }
 

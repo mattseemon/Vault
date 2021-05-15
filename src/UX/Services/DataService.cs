@@ -12,6 +12,7 @@ namespace Seemon.Vault.Services
         private readonly IFileService _fileService;
         private readonly ApplicationConfig _appConfig;
         private readonly string _localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
         public DataService(IFileService fileService, IOptions<ApplicationConfig> appConfig)
         {
             _fileService = fileService;

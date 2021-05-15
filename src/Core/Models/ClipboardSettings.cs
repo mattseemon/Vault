@@ -17,30 +17,34 @@ namespace Seemon.Vault.Core.Models
             OnDemand
         }
 
-        private CopyActions _copy = CopyActions.OnDemand;
-        private bool _autoClear = false;
-        private int _autoClearDuration = 10;
+        private CopyActions _copy;
+        private bool _autoClear;
+        private int _autoClearDuration;
 
         [JsonProperty("copy")]
         [JsonConverter(typeof(StringEnumConverter))]
         public CopyActions Copy
         {
-            get => _copy;
-            set => SetProperty(ref _copy, value);
+            get => _copy; set => SetProperty(ref _copy, value);
         }
 
         [JsonProperty("autoClear")]
         public bool AutoClear
         {
-            get => _autoClear;
-            set => SetProperty(ref _autoClear, value);
+            get => _autoClear; set => SetProperty(ref _autoClear, value);
         }
 
         [JsonProperty("autoClearDuration")]
         public int AutoClearDuration
         {
-            get => _autoClearDuration;
-            set => SetProperty(ref _autoClearDuration, value);
+            get => _autoClearDuration; set => SetProperty(ref _autoClearDuration, value);
         }
+
+        public static ClipboardSettings Default => new() 
+        { 
+            Copy = CopyActions.OnDemand, 
+            AutoClear = false, 
+            AutoClearDuration = 10 
+        };
     }
 }

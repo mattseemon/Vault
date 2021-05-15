@@ -13,8 +13,10 @@
                 <!-- Theme setting -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
 
-                <!-- Application Logo -->
-                <ResourceDictionary x:Name="Logo" Source="pack://application:,,,/Assets/Vault.xaml" />
+                <!-- Application Assets -->
+                <ResourceDictionary x:Name="Logo" Source="pack://application:,,,/Assets/Vault.Icon.xaml" />
+                <ResourceDictionary x:Name="TBI" Source="pack://application:,,,/Assets/Vault.TaskbarIcon.xaml" />
+                <ResourceDictionary x:Name="TabControl" Source="pack://application:,,,/Assets/Vault.TabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

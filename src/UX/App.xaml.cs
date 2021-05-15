@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Views;
 using Seemon.Vault.Core.Models;
 using Seemon.Vault.Core.Services;
+using Seemon.Vault.Helpers.Extensions;
 using Seemon.Vault.Services;
 using Seemon.Vault.ViewModels;
 using Seemon.Vault.Views;
@@ -23,7 +25,10 @@ namespace Seemon.Vault
     {
         private IHost _host;
 
-        public T GetService<T>() where T : class => _host.Services.GetService(typeof(T)) as T;
+        public static T GetService<T>() where T : class
+        {
+            return ((App)Current)._host.Services.GetService(typeof(T)) as T;
+        }
 
         public App() { }
 
@@ -40,7 +45,7 @@ namespace Seemon.Vault
                 {
                     c.SetBasePath(appLocation);
                     c.AddInMemoryCollection(activationArgs);
-                })
+                }) 
                 .ConfigureServices(ConfigureServices)
                 .Build();
 
@@ -63,11 +68,12 @@ namespace Seemon.Vault
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
-
+            services.AddSingleton<IWindowManagerService, WindowManagerService>();
+            services.AddSingleton<ITaskbarIconService, TaskbarIconService>();
 
             // Views and ViewModels
-            services.AddTransient<IShellWindow, ShellWindow>();
-            services.AddTransient<ShellViewModel>();
+            services.AddSingleton<IShellWindow, ShellWindow>();
+            services.AddSingleton<ShellViewModel>();
 
             services.AddTransient<WelcomeViewModel>();
             services.AddTransient<WelcomePage>();
@@ -81,8 +87,14 @@ namespace Seemon.Vault
             services.AddTransient<LicenseViewModel>();
             services.AddTransient<LicensePage>();
 
+            services.AddTransient<ProfileViewModel>();
+            services.AddTransient<ProfileWindow>();
+
+            services.AddTransient<TaskbarIconViewModel>();
+
             // Configuration
             services.Configure<ApplicationConfig>(context.Configuration.GetSection(nameof(ApplicationConfig)));
+            services.ConfigureDictionary<ApplicationUrls>(context.Configuration.GetSection("urls"));
         }
 
         private async void OnExit(object sender, ExitEventArgs e)

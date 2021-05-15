@@ -16,9 +16,9 @@ namespace Seemon.Vault.Services
 
         public event EventHandler<string> Navigated;
 
-        public bool CanGoBack => _frame.CanGoBack;
-
         public NavigationService(IPageService pageService) => _pageService = pageService;
+
+        public bool CanGoBack => _frame.CanGoBack;
 
         public void Initialize(Frame sheelFrame)
         {

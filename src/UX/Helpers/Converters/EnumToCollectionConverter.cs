@@ -20,12 +20,9 @@ namespace Seemon.Vault.Helpers.Converters
 
         private IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type t)
         {
-            if (!t.IsEnum)
-            {
-                throw new ArgumentException($"{nameof(t)} must be an enum type");
-            }
-
-            return Enum.GetValues(t).Cast<Enum>().Select((e) => new ValueDescription() { Value = e, Description = e.GetDescription() }).ToList();
+            return !t.IsEnum
+                ? throw new ArgumentException($"{nameof(t)} must be an enum type")
+                : Enum.GetValues(t).Cast<Enum>().Select((e) => new ValueDescription() { Value = e, Description = e.GetDescription() }).ToList();
         }
     }
 }

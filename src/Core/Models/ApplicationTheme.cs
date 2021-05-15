@@ -24,15 +24,13 @@ namespace Seemon.Vault.Core.Models
         [JsonConverter(typeof(StringEnumConverter))]
         public ThemeBase Base 
         {
-            get => _base;
-            set => SetProperty(ref _base, value); 
+            get => _base; set => SetProperty(ref _base, value); 
         }
 
         [JsonProperty("accent")]
         public string Accent 
         { 
-            get => _accent; 
-            set => SetProperty(ref _accent, value); 
+            get => _accent; set => SetProperty(ref _accent, value); 
         }
 
         public override string ToString() => $"{Base}.{Accent}";
