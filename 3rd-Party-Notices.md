@@ -216,7 +216,7 @@ This package includes a .NET Standard MVVM library with helpers such as:
 
 ---
 
-## Hardcodet.NotifyIcon.Wpf.NetCore (1.1.0)
+## Hardcodet.NotifyIcon.Wpf (1.1.0)
 
 ### Description
 This is an implementation of a NotifyIcon (aka system tray icon or taskbar icon) for the WPF platform. 

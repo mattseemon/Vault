@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 		- ApplicationConfig - Model for application configuration file. Application configuration is uses to store fixed settings like, setting file location and application urls
 	5. Helper Classes like converters, extensions and constants.
 
-## [0.1.5-alpha]
+## [0.1.5-alpha] - 2021-05-15
 
 ### Summary
 	1. Added additional services to manage Windows, TaskbarIcon
