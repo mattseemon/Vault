@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ContextMenu x:Key="TBIContextMenu">
+        <MenuItem Command="{Binding ShowCommand}" Header="Show" />
+        <MenuItem Command="{Binding ExitCommand}" Header="Exit" />
+    </ContextMenu>
+    <Border
+        x:Key="TBITooltip"
+        Background="{DynamicResource MahApps.Brushes.SystemControlBackgroundAccent}"
+        BorderBrush="{DynamicResource MahApps.Brushes.Control.Border}"
+        BorderThickness=".5" CornerRadius="2">
+        <StackPanel Margin="10">
+            <TextBlock
+                Margin="0,0,0,5" FontSize="14" FontWeight="Bold"
+                Foreground="{DynamicResource MahApps.Brushes.Selected.Foreground}">
+                VAULT
+            </TextBlock>
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.Selected.Foreground}">Double click the tray icon to display main window.</TextBlock>
+        </StackPanel>
+    </Border>
+</ResourceDictionary>

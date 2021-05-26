@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>Vault</AssemblyName>
+    <RootNamespace>Seemon.Vault</RootNamespace>
+    <Authors>Matt Seemon</Authors>
+    <Description>A file system based secrets repository, powered by OpenPGP.</Description>
+    <Copyright>© Copyright 2020, Matt Seemon. All rights reserved.</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/mattseemon/Vault</RepositoryUrl>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <ApplicationIcon>Assets\Vault.ico</ApplicationIcon>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controls\BrowserBehavior.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Vault.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Versioning\AssemblyInfo.cs" Link="AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Vault-Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.5" />
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.8.0" />
+    <PackageReference Include="Markdig.Wpf" Version="0.5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.4.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Vault.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
