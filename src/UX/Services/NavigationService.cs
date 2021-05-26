@@ -1,4 +1,5 @@
-﻿using Seemon.Vault.Core.Contracts.Services;
+﻿using Microsoft.Extensions.Logging;
+using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
 using Seemon.Vault.Helpers.Extensions;
 using System;
@@ -10,18 +11,24 @@ namespace Seemon.Vault.Services
     public class NavigationService : INavigationService
     {
         private readonly IPageService _pageService;
+        private readonly ILogger<INavigationService> _logger;
 
         private Frame _frame;
         private object _lastParameterUsed;
 
         public event EventHandler<string> Navigated;
 
-        public NavigationService(IPageService pageService) => _pageService = pageService;
+        public NavigationService(IPageService pageService, ILogger<INavigationService> logger)
+        {
+            _pageService = pageService;
+            _logger = logger;
+        }
 
         public bool CanGoBack => _frame.CanGoBack;
 
         public void Initialize(Frame sheelFrame)
         {
+            _logger.LogInformation($"Starting application navigation service.");
             if (_frame == null)
             {
                 _frame = sheelFrame;
@@ -31,6 +38,7 @@ namespace Seemon.Vault.Services
 
         public void UnsubscribeNavigation()
         {
+            _logger.LogInformation($"Stopping application navigation service.");
             if (_frame != null)
             {
                 _frame.Navigated -= OnNavigated;
@@ -54,26 +62,33 @@ namespace Seemon.Vault.Services
 
         public bool NavigateTo(string pageKey, object parameter = null, bool clearNavigation = false)
         {
-            var pageType = _pageService.GetPageType(pageKey);
-
-            if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
+            _logger.LogInformation($"Navigating to {pageKey}.");
+            try
             {
-                _frame.Tag = clearNavigation;
-                var page = _pageService.GetPage(pageKey);
-                var navigated = _frame.Navigate(page, parameter);
+                var pageType = _pageService.GetPageType(pageKey);
 
-                if (navigated)
+                if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
                 {
-                    _lastParameterUsed = parameter;
-                    var dataContext = _frame.GetDataContext();
-                    if (dataContext is INavigationAware navigationAware)
-                    {
-                        navigationAware.OnNavigateFrom();
-                    }
-                }
-                return navigated;
-            }
+                    _frame.Tag = clearNavigation;
+                    var page = _pageService.GetPage(pageKey);
+                    var navigated = _frame.Navigate(page, parameter);
 
+                    if (navigated)
+                    {
+                        _lastParameterUsed = parameter;
+                        var dataContext = _frame.GetDataContext();
+                        if (dataContext is INavigationAware navigationAware)
+                        {
+                            navigationAware.OnNavigateFrom();
+                        }
+                    }
+                    return navigated;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex, ex.Message);
+            }
             return false;
         }
 

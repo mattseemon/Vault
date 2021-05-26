@@ -8,5 +8,9 @@ namespace Seemon.Vault.Core.Contracts.Services
         Window MainWindow { get; }
 
         IWindow GetWindow(string pageKey);
+
+        void RestoreWindowSettings();
+
+        void SaveWindowSettings();
     }
 }

@@ -1,31 +1,32 @@
 ﻿using ControlzEx.Theming;
+using Microsoft.Extensions.Logging;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Models;
 using Seemon.Vault.Helpers;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Seemon.Vault.Services
 {
     public class ThemeSelectorService : IThemeSelectorService
     {
         private readonly ISettingsService _settingsService;
+        private readonly ILogger<IThemeSelectorService> _logger;
 
-        public ThemeSelectorService(ISettingsService settingsService) => _settingsService = settingsService;
-
-        public void InitializeTheme()
+        public ThemeSelectorService(ISettingsService settingsService, ILogger<IThemeSelectorService> logger)
         {
-            var theme = GetCurrentTheme();
-            SetTheme(theme);
+            _settingsService = settingsService;
+            _logger = logger;
         }
 
-        public ApplicationTheme GetCurrentTheme()
-        {
-            return _settingsService.Get<ApplicationTheme>(Constants.SETTINGS_APPLICATION_THEME, ApplicationTheme.Default);
-        }
+        public void InitializeTheme() => SetTheme(GetCurrentTheme());
+
+        public ApplicationTheme GetCurrentTheme() => _settingsService.Get(Constants.SETTINGS_APPLICATION_THEME, ApplicationTheme.Default);
 
         public void SetTheme(ApplicationTheme theme)
         {
-            if (theme == ApplicationTheme.Default)
+            _logger.LogInformation($"Setting application theme to {theme}");
+            if (theme.ToString() == ApplicationTheme.Default.ToString())
             {
                 ThemeManager.Current.SyncTheme(ThemeSyncMode.SyncAll);
             }
@@ -34,7 +35,11 @@ namespace Seemon.Vault.Services
                 ThemeManager.Current.SyncTheme(ThemeSyncMode.SyncAll);
                 if (theme.Base == ApplicationTheme.ThemeBase.System)
                 {
-                    ThemeManager.Current.ChangeThemeColorScheme(Application.Current, theme.Accent);
+                    var currentTheme = ThemeManager.Current.DetectTheme(Application.Current);
+                    var inverseThem = ThemeManager.Current.GetInverseTheme(currentTheme);
+
+                    ThemeManager.Current.AddTheme(RuntimeThemeGenerator.Current.GenerateRuntimeTheme(inverseThem.BaseColorScheme, (Color)ColorConverter.ConvertFromString(theme.Accent)));
+                    ThemeManager.Current.ChangeTheme(Application.Current, ThemeManager.Current.AddTheme(RuntimeThemeGenerator.Current.GenerateRuntimeTheme(currentTheme.BaseColorScheme, (Color)ColorConverter.ConvertFromString(theme.Accent))));
                 }
                 else if (theme.Accent == "System")
                 {
@@ -42,7 +47,11 @@ namespace Seemon.Vault.Services
                 }
                 else
                 {
-                    ThemeManager.Current.ChangeTheme(Application.Current, theme.ToString(), SystemParameters.HighContrast);
+                    var newTheme = RuntimeThemeGenerator.Current.GenerateRuntimeTheme(theme.Base.ToString(), (Color)ColorConverter.ConvertFromString(theme.Accent));
+                    var inverseTheme = ThemeManager.Current.GetInverseTheme(newTheme);
+
+                    ThemeManager.Current.AddTheme(inverseTheme);
+                    ThemeManager.Current.ChangeTheme(Application.Current, ThemeManager.Current.AddTheme(newTheme));
                 }
             }
             _settingsService.Set(Constants.SETTINGS_APPLICATION_THEME, theme);

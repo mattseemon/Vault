@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Mvvm.Input;
 using Seemon.Vault.Contracts.Services;
+using Seemon.Vault.Controls.Notifications;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Models;
 using Seemon.Vault.Helpers;
@@ -15,9 +16,10 @@ namespace Seemon.Vault.ViewModels
         private readonly IApplicationInfoService _applicationInfoService;
         private readonly ITaskbarIconService _taskbarIconService;
         private readonly ISettingsService _settingsService;
+        private readonly INotificationService _notificationService;
+        private readonly IWindowManagerService _windowManagerService;
 
         private string _pageTitle = null;
-
         private RelayCommand _goBackCommand;
         private ICommand _loadedCommand;
         private ICommand _unloadedCommand;
@@ -37,13 +39,18 @@ namespace Seemon.Vault.ViewModels
 
         public ICommand ShowSettingsCommand => _showSettings ??= new RelayCommand(OnShowSettings);
 
-        public ShellViewModel(INavigationService navigationService, IApplicationInfoService applicationInfoService, 
-            ITaskbarIconService taskbarIconService, ISettingsService settingsService)
+        public INotificationMessageManager Manager => _notificationService.Manager;
+
+        public ShellViewModel(INavigationService navigationService, IApplicationInfoService applicationInfoService,
+            ITaskbarIconService taskbarIconService, ISettingsService settingsService, INotificationService notificationService,
+            IWindowManagerService windowManagerService)
         {
             _navigationService = navigationService;
             _applicationInfoService = applicationInfoService;
             _taskbarIconService = taskbarIconService;
             _settingsService = settingsService;
+            _notificationService = notificationService;
+            _windowManagerService = windowManagerService;
         }
 
         public string PageTitle
@@ -60,8 +67,9 @@ namespace Seemon.Vault.ViewModels
         {
             var e = (CancelEventArgs)parameter;
             var settings = _settingsService.Get<SystemSettings>(Constants.SETTINGS_SYSTEM);
+            _windowManagerService.SaveWindowSettings();
 
-            if(settings.ShowVaultInNotificationArea && settings.CloseToNotificationArea)
+            if (settings.ShowVaultInNotificationArea && settings.CloseToNotificationArea)
             {
                 _taskbarIconService.Hide();
                 e.Cancel = true;

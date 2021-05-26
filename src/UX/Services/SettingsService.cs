@@ -1,17 +1,21 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using Seemon.Vault.Core.Contracts.Services;
+using System.Windows;
 
 namespace Seemon.Vault.Services
 {
     public class SettingsService : ISettingsService
     {
-        public SettingsService() { }
+        private readonly ILogger<ISettingsService> _logger;
+
+        public SettingsService(ILogger<ISettingsService> logger) => _logger = logger;
 
         public T Get<T>(string key, T @default)
         {
-            if (!App.Current.Properties.Contains(key))
+            if (!Application.Current.Properties.Contains(key))
             {
-                App.Current.Properties[key] = @default;
+                Application.Current.Properties[key] = @default;
                 return @default;
             }
 
@@ -20,26 +24,27 @@ namespace Seemon.Vault.Services
 
         public T Get<T>(string key)
         {
-            if (!App.Current.Properties.Contains(key))
+            if (!Application.Current.Properties.Contains(key))
             {
-                throw new System.Exception($"Could not find setting with identifier - {key}.");
+                _logger.LogInformation($"Could not find setting with name - {key}.");
+                return default;
             }
 
-            if (App.Current.Properties[key] is JObject)
+            if (Application.Current.Properties[key] is JObject)
             {
-                JObject jObject = App.Current.Properties[key] as JObject;
-                App.Current.Properties[key] = jObject.ToObject<T>();
+                JObject jObject = Application.Current.Properties[key] as JObject;
+                Application.Current.Properties[key] = jObject.ToObject<T>();
             }
 
-            if (App.Current.Properties[key] is JArray)
+            if (Application.Current.Properties[key] is JArray)
             {
-                JArray jArray = App.Current.Properties[key] as JArray;
-                App.Current.Properties[key] = jArray.ToObject<T>();
+                JArray jArray = Application.Current.Properties[key] as JArray;
+                Application.Current.Properties[key] = jArray.ToObject<T>();
             }
 
-            return (T)App.Current.Properties[key];
+            return (T)Application.Current.Properties[key];
         }
 
-        public void Set<T>(string key, T value) => App.Current.Properties[key] = value;
+        public void Set<T>(string key, T value) => Application.Current.Properties[key] = value;
     }
 }

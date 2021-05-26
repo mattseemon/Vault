@@ -12,6 +12,14 @@
 
         public string GetCopyright();
 
+        public bool GetIsPreRelease();
+
         public string GetApplicationIdentifier();
+
+        public string GetApplicationExecutablePath();
+
+        public string GetDataPath();
+
+        public string GetLogPath();
     }
 }

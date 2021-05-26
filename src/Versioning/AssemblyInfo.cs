@@ -1,8 +1,8 @@
 ﻿/*
  Major: 0   
  Minor: 1   
- Patch: 6   
- Build: 35756   
+ Patch: 16   
+ Build: 53304   
 Suffix: alpha 
 
 This file is generated automatically with each build. 
@@ -13,8 +13,9 @@ using System.Reflection;
 using System.Windows;
 
 [assembly: AssemblyVersion("0.1")]
-[assembly: AssemblyFileVersion("0.1.6.35756")]
-[assembly: AssemblyInformationalVersion("0.1.6-alpha")]
+[assembly: AssemblyFileVersion("0.1.16.53304")]
+[assembly: AssemblyInformationalVersion("0.1.16-alpha")]
+
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
                                      //(used if a resource is not found in the page,

@@ -58,7 +58,21 @@ using System.Windows;
 
 [assembly: AssemblyVersion("<#= major #>.<#= minor #>")]
 [assembly: AssemblyFileVersion("<#= major #>.<#= minor #>.<#= patch #>.<#= build #>")]
+<#
+if(string.IsNullOrEmpty(suffix))
+{
+#>
+[assembly: AssemblyInformationalVersion("<#= major #>.<#= minor #>.<#= patch #>")]
+<#
+}
+else
+{
+#>
 [assembly: AssemblyInformationalVersion("<#= major #>.<#= minor #>.<#= patch #>-<#= suffix #>")]
+<#
+}
+#>
+
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
                                      //(used if a resource is not found in the page,

@@ -33,8 +33,7 @@ namespace Seemon.Vault.ViewModels
         [Required]
         public string Name
         {
-            get => _name;
-            set => SetProperty(ref _name, value, true);
+            get => _name; set => SetProperty(ref _name, value, true);
         }
 
         [Required]
@@ -49,6 +48,15 @@ namespace Seemon.Vault.ViewModels
                 {
                     Name = value;
                 }
+            }
+        }
+
+        public override void SetModel(object model)
+        {
+            if (model is Profile profile)
+            {
+                Name = profile.Name;
+                Location = profile.Location;
             }
         }
 
@@ -70,15 +78,6 @@ namespace Seemon.Vault.ViewModels
             location = _systemService.ShowFolderDialog("Select root path to vault", location);
             if (!string.IsNullOrEmpty(location))
                 Location = location;
-        }
-
-        public override void SetModel(object model)
-        {
-            if (model is Profile profile)
-            {
-                Name = profile.Name;
-                Location = profile.Location;
-            }
         }
     }
 }

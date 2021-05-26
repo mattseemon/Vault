@@ -13,10 +13,10 @@
         <TextBlock
             Margin="5" Padding="5" DockPanel.Dock="Top" TextWrapping="Wrap">
             <Bold>
-                <Hyperlink Command="{Binding OpenInBrowserCommand}">Vault</Hyperlink>
+                <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="website">Vault</Hyperlink>
             </Bold>
             <Run>is an open source project published under the MIT License. You can view the source code and contribute to this project on</Run>
-            <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="https://github.com/mattseemon/Vault">GitHub</Hyperlink>
+            <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="source">GitHub</Hyperlink>
             <Run>.</Run></TextBlock>
         <TextBlock Text="{Binding Lines, Converter={converter:ListToStringConverter}}"
             Margin="5,0,5,5" Padding="5" TextAlignment="Justify"
@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Column="0" Margin="5" Padding="5" VerticalAlignment="Center">
-                <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="3rdParty">3rd Party Licenses and Open Source Notices</Hyperlink>
+                <Hyperlink Command="{Binding OpenInBrowserCommand}" CommandParameter="accreditation">3rd Party Licenses and Open Source Notices</Hyperlink>
             </TextBlock>
         </Grid>
     </StackPanel>

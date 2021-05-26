@@ -60,12 +60,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 	1. Services
-		- WindowManagerService - Service class for accessing open application windows
+		- WindowManagerService - Service class for accessing open application windows.
 		- TaskbarIconService = Service class for the creation, management and destruction of Taskbar Icon.
 	2. Windows/Pages
 		- ProfileWindow - GUI to add or edit profile properties.
 	3. ViewModels
-		- ProfileViewModel & TaskbarIconViewModel
+		- ProfileViewModel & TaskbarIconViewModel.
 	5. Helper classes
 		- WindowBase - Base class for windows. Shared/common functionality is implemented here. 
 		- ViewModelBase - Base class for view models. Shared/common functionality is implemented here.
@@ -74,4 +74,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 	1. Minor changes were made to all files as part of refactoring and code formatting.
 	2. Updated Microsoft Toolkit to 7.0.2
-	3. Updated CHANGELOG.md, 3rd-Party-Notices.md, README.md
+	3. Updated CHANGELOG.md, 3rd-Party-Notices.md, README.md.
+
+## [0.1.16-alpha] - 2021-05-26
+
+### Added
+	1. Added the following Services.
+		a. HttpService - Service class to manage HttpRequests from within the application.
+		b. NotificationService - Service class to display In-App notifications.
+		c. UpdateService - Service class used to download and install new application updates. Uses HttpService for all requests to GitHub API to retrieve updates and NotificationService for all user interaction.
+		d. CommandLineService - Service class to process command line arguments.
+	2. Controls
+		a. NotificationControl - control which displays in-app notifications.
+			- Included "WPF.Notifications" library code into project, rather than package as the last published package was alerting due to incompatibility to .NET 5.0 Framework.
+	3. Models
+		- GitHubRelease, GitHubAsset, GitHubVersion - Used by UpdateService.
+		- WindowSettings - Used by WindowManagerService.
+	4. Windows/Pages
+		- ReleaseNotesWindow - GUI to display application update release Notes
+	5. Additional Extensions and converters added
+		- MarkdownToFlowDocumentConverter - Converts Release Notes markdown to a FlowDocument for display.
+
+### Changed
+	1. Updated FileService to include methods for generating file hashes & do file integrity checkes.
+	2. Updated WindowManagerService to include methods to save and restore WindowPosition.
+	3. Lots of minor tweaks and code clean up.
+	4. Updated CHANGELOG.md, 3rd-Party-Notices.md, README.md.

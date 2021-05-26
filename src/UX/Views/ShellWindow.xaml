@@ -8,6 +8,7 @@
     xmlns:local="clr-namespace:Seemon.Vault"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notify="clr-namespace:Seemon.Vault.Controls.Notifications"
     Title="{Binding PageTitle}"
     Width="1024" Height="768" MinWidth="1024" MinHeight="768"
     Icon="pack://application:,,,/Assets/Vault.ico" ResizeMode="CanResizeWithGrip"
@@ -42,7 +43,14 @@
         </mah:WindowCommands>
     </controls:WindowBase.RightWindowCommands>
     <controls:WindowBase.Content>
-        <Frame x:Name="ShellFrame"
-            Focusable="False" NavigationUIVisibility="Hidden" />
+        <Grid>
+            <Frame x:Name="ShellFrame"
+                Focusable="False" NavigationUIVisibility="Hidden" />
+            <Canvas>
+                <notify:NotificationMessageContainer
+                    Canvas.Right="0" Canvas.Bottom="0"
+                    Manager="{Binding Manager}" />
+            </Canvas>
+        </Grid>
     </controls:WindowBase.Content>
 </controls:WindowBase>

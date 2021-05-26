@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Activation;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Views;
-using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
 using Seemon.Vault.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,21 +15,23 @@ namespace Seemon.Vault.Services
 {
     public class ApplicationHostService : IHostedService
     {
+        private readonly ILogger<IHostedService> _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly IDataService _dataService;
         private readonly IThemeSelectorService _themeSelectorService;
         private readonly INavigationService _navigationService;
         private readonly IEnumerable<IActivationHandler> _activationHandlers;
         private readonly ITaskbarIconService _taskbarIconService;
-        private readonly ISettingsService _settingsService;
         private readonly IWindowManagerService _windowManagerService;
+        private readonly ICommandLineService _commandLineService;
 
         private IShellWindow _shellWindow;
         private bool _isInitialized;
 
         public ApplicationHostService(IServiceProvider serviceProvider, IEnumerable<IActivationHandler> activationHandlers,
             IDataService dataService, IThemeSelectorService themeSelectorService, INavigationService navigationService,
-            ITaskbarIconService taskbarIconService, ISettingsService settingsService, IWindowManagerService windowManagerService)
+            ITaskbarIconService taskbarIconService, IWindowManagerService windowManagerService,
+            ILogger<IHostedService> logger, ICommandLineService commandLineService)
         {
             _serviceProvider = serviceProvider;
             _activationHandlers = activationHandlers;
@@ -38,24 +39,32 @@ namespace Seemon.Vault.Services
             _themeSelectorService = themeSelectorService;
             _navigationService = navigationService;
             _taskbarIconService = taskbarIconService;
-            _settingsService = settingsService;
             _windowManagerService = windowManagerService;
+            _logger = logger;
+            _commandLineService = commandLineService;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"Application services are being initialized");
+
             await InitializeAsync();
             await HandleActivationAsync();
             await StartupAsync();
 
             _isInitialized = true;
+
+            _logger.LogInformation($"Application services initialized");
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation($"Application services are being stopped");
+
             _taskbarIconService.Destroy();
             _dataService.PersistData();
 
+            _logger.LogInformation($"Application shutdown complete.");
             await Task.CompletedTask;
         }
 
@@ -75,7 +84,7 @@ namespace Seemon.Vault.Services
             if (!_isInitialized)
             {
                 _taskbarIconService.Initialize();
-                _windowManagerService.MainWindow.Topmost = _settingsService.Get<SystemSettings>(Constants.SETTINGS_SYSTEM).AlwaysOnTop;
+                _windowManagerService.RestoreWindowSettings();
 
                 await Task.CompletedTask;
             }
@@ -84,7 +93,6 @@ namespace Seemon.Vault.Services
         private async Task HandleActivationAsync()
         {
             var activationHandler = _activationHandlers.FirstOrDefault(h => h.CanHandle());
-
             if (activationHandler != null)
             {
                 await activationHandler.HandleAsync();
@@ -98,8 +106,11 @@ namespace Seemon.Vault.Services
                 _navigationService.Initialize(_shellWindow.GetNavigationFrame());
                 _shellWindow.Show();
                 _navigationService.NavigateTo(typeof(WelcomeViewModel).FullName);
-                await Task.CompletedTask;
             }
+
+            _commandLineService.ProcessCommandLineArguments();
+
+            await Task.CompletedTask;
         }
     }
 }

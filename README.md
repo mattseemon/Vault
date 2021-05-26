@@ -64,8 +64,18 @@ VAULT was developed using the below tools and technologies.
 [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)|2.4.5
 [MahApps.Metro.IconPacks.Material](https://github.com/MahApps/MahApps.Metro.IconPacks)|4.8.0
 [Microsoft.Extensions.Hosting](https://github.com/dotnet/runtime)|5.0.0
+[Microsoft.Extensions.Logging](https://github.com/dotnet/runtime)|5.0.0
 [Microsoft.Toolkit.Mvvm](https://github.com/windows-toolkit/WindowsCommunityToolkit)|7.0.2
 [Hardcodet.NotifyIcon.Wpf](https://github.com/hardcodet/wpf-notifyicon)|1.1.0
+[Markdig.Wpf](https://github.com/Kryptos-FR/markdig.wpf)|0.5.0.1
+[Serilog](https://serilog.net/)|2.10.0
+[Serilog.Formatting.Compact](https://github.com/serilog/serilog-formatting-compact)|1.1.0
+[Serilog.Sinks.Async](https://serilog.net/)|1.4.0
+[Serilog.Sinks.File](https://serilog.net/)|4.1.0
+[Serilog.Extensions.Logging](https://github.com/serilog/serilog-extensions-logging)|3.0.1
+[Enterwell.Clients.Wpf.Notifications](https://github.com/Enterwell/Wpf.Notifications)|*
+
+\* Instead of using the published packages, either included the code as-is or a modified version of the same.
 
 ## Contributing <a name="contributing"></a>
 

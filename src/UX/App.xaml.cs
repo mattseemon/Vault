@@ -10,6 +10,8 @@ using Seemon.Vault.Helpers.Extensions;
 using Seemon.Vault.Services;
 using Seemon.Vault.ViewModels;
 using Seemon.Vault.Views;
+using Serilog;
+using Serilog.Formatting.Compact;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -30,7 +32,22 @@ namespace Seemon.Vault
             return ((App)Current)._host.Services.GetService(typeof(T)) as T;
         }
 
-        public App() { }
+        public App()
+        {
+            var appInfo = new ApplicationInfoService();
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.WithProperty("Version", appInfo.GetVersion())
+                .MinimumLevel.Information()
+                .WriteTo.Async(a => a.File(
+                    Path.Combine(appInfo.GetLogPath(), "log-.txt"),
+                    rollingInterval: RollingInterval.Day,
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} ({Version}) [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"))
+                .WriteTo.Async(a => a.File(
+                    new CompactJsonFormatter(), Path.Combine(appInfo.GetLogPath(), "errors.json"),
+                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error,
+                    rollingInterval: RollingInterval.Month))
+                .CreateLogger();
+        }
 
         private async void OnStartup(object sender, StartupEventArgs e)
         {
@@ -45,7 +62,11 @@ namespace Seemon.Vault
                 {
                     c.SetBasePath(appLocation);
                     c.AddInMemoryCollection(activationArgs);
-                }) 
+                })
+                .ConfigureLogging((context, logging) =>
+                {
+                    logging.AddSerilog();
+                })
                 .ConfigureServices(ConfigureServices)
                 .Build();
 
@@ -59,17 +80,21 @@ namespace Seemon.Vault
 
             // Core Services
             services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<IDataService, DataService>();
+            services.AddSingleton<ISystemService, SystemService>();
+            services.AddSingleton<ISettingsService, SettingsService>();
+            services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
+            services.AddSingleton<ICommandLineService, CommandLineService>();
 
             // Services
-            services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
-            services.AddSingleton<ISystemService, SystemService>();
-            services.AddSingleton<IDataService, DataService>();
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-            services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IWindowManagerService, WindowManagerService>();
             services.AddSingleton<ITaskbarIconService, TaskbarIconService>();
+            services.AddSingleton<IHttpService, HttpService>();
+            services.AddSingleton<IUpdateService, UpdateService>();
+            services.AddSingleton<INotificationService, NotificationService>();
 
             // Views and ViewModels
             services.AddSingleton<IShellWindow, ShellWindow>();
@@ -90,23 +115,25 @@ namespace Seemon.Vault
             services.AddTransient<ProfileViewModel>();
             services.AddTransient<ProfileWindow>();
 
+            services.AddTransient<ReleaseNotesViewModel>();
+            services.AddTransient<ReleaseNotesWindow>();
+
             services.AddTransient<TaskbarIconViewModel>();
 
             // Configuration
-            services.Configure<ApplicationConfig>(context.Configuration.GetSection(nameof(ApplicationConfig)));
             services.ConfigureDictionary<ApplicationUrls>(context.Configuration.GetSection("urls"));
         }
 
         private async void OnExit(object sender, ExitEventArgs e)
         {
             await _host.StopAsync();
+            Log.CloseAndFlush();
             _host.Dispose();
             _host = null;
         }
 
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-
         }
     }
 }

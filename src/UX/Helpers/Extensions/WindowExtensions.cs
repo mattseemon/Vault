@@ -8,12 +8,9 @@ namespace Seemon.Vault.Helpers.Extensions
     {
         public static IViewModel GetDataContext(this Window window)
         {
-            if (window.Content is Frame frame)
-            {
-                return frame.GetDataContext();
-            }
-
-            return window.DataContext != null ? window.DataContext as IViewModel : null;
+            return window.FindName("ShellFrame") is Frame frame
+                ? frame.GetDataContext()
+                : window.DataContext != null ? window.DataContext as IViewModel : null;
         }
     }
 }

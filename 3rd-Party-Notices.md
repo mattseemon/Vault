@@ -10,8 +10,16 @@ Package|Licenses
 [MahApps.Metro (2.4.5)](#mahappsmetro-245)|MIT
 [MahApps.Metro.IconPacks.Material (4.8.0)](#mahappsmetroiconpacksmaterial-480)|MIT
 [Microsoft.Extensions.Hosting (5.0.0)](#microsoftextensionshosting-500)|MIT
+[Microsoft.Extensions.Logging (5.0.0)](#microsoftextensionslogging-500)|MIT
 [Microsoft.Toolkit.Mvvm (7.0.2)](#microsofttoolkitmvvm-702)|MIT
-[Hardcodet.NotifyIcon.Wpf (1.1.0)](#hardcodetnotifyiconwpf-110)|(CPOL)
+[Hardcodet.NotifyIcon.Wpf (1.1.0)](#hardcodetnotifyiconwpf-110)|CPOL
+[Markdig.Wpf (0.5.0.1)](#markdigwpf-0501)|MIT
+[SeriLog (2.10.0)](#serilog-2100)|Apache-2.0
+[Serilog.Formatting.Compact (1.1.0)](#serilogformattingcompact-110)|Apache-2.0
+[Serilog.Sinks.Async (1.4.0)](#serilogsinksasync-140)|Apache-2.0
+[Serilog.Sinks.File (4.1.0)](#serilogsinksfile-410)|Apache-2.0
+[Serilog.Extensions.Logging (3.0.1)](#serilogextensionslogging-301)|Apache-2.0
+[Enterwell.Clients.Wpf.Notifications](#enterwellclientswpfnotifications)|MIT
 
 ---
 
@@ -132,6 +140,46 @@ IconPacks for stylish awesome WPF or UWP apps.
 
 ### Description
 Hosting and startup infrastructures for applications.
+
+### Declared License(s)
+  * MIT
+
+        The MIT License (MIT)
+
+        Copyright (c) .NET Foundation and Contributors
+
+        All rights reserved.
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+
+### Authors
+  * Microsoft
+
+### Package Homepage
+  * https://github.com/dotnet/runtime
+
+---
+
+## **Microsoft.Extensions.Logging (5.0.0)**
+
+### Description
+Logging infrastructure default implementation for Microsoft.Extensions.Logging. 
 
 ### Declared License(s)
   * MIT
@@ -302,3 +350,220 @@ Source code and extensive sample application available at http://www.hardcodet.n
   * https://github.com/hardcodet/wpf-notifyicon
 
   ---
+
+## **Markdig.Wpf (0.5.0.1)**
+
+### Description
+A WPF library for lunet-io/markdig
+
+### Declared License(s)
+  * MIT
+  
+        The MIT License (MIT)
+        
+        Copyright (c) Nicolas Musset 2016-2021
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy of
+        this software and associated documentation files (the "Software"), to deal in
+        the Software without restriction, including without limitation the rights to
+        use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+        the Software, and to permit persons to whom the Software is furnished to do so,
+        subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+        FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+        COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+        IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+        CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		
+### Authors
+  * Nicolas Musset
+
+### Package Homepage
+  * https://github.com/Kryptos-FR/markdig.wpf
+
+---
+## SeriLog (2.10.0)
+
+### Description
+Simple .NET logging with fully-structured events
+
+### Declared License(s)
+  * Apache-2.0
+
+        Copyright 2021, SeriLog Contributors
+		
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+		
+		http://www.apache.org/licenses/LICENSE-2.0
+		
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		
+		See the License for the specific language governing permissions and limitations under the License.
+
+### Authors
+  * Serilog Contributors
+
+### Package Homepage
+  * https://serilog.net/
+
+---
+## Serilog.Formatting.Compact (1.1.0)
+
+### Description
+A simple, compact JSON-based event format for Serilog.
+
+### Declared License(s)
+  * Apache-2.0
+
+        Copyright 2021, Serilog.Formatting.Compact Contributors
+		
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+		
+		http://www.apache.org/licenses/LICENSE-2.0
+		
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		
+		See the License for the specific language governing permissions and limitations under the License.
+
+### Authors
+  * Serilog Contributors
+
+### Package Homepage
+  * https://github.com/serilog/serilog-formatting-compact
+
+---
+## Serilog.Sinks.Async (1.4.0)
+
+### Description
+Asynchronous sink wrapper for Serilog.
+
+### Declared License(s)
+  * Apache-2.0
+
+        Copyright 2021, Serilog.Sinks.Async Contributors
+		
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+		
+		http://www.apache.org/licenses/LICENSE-2.0
+		
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		
+		See the License for the specific language governing permissions and limitations under the License.
+
+### Authors
+  * Jezz Santos, Serilog Contributors
+
+### Package Homepage
+  * https://serilog.net/
+
+---
+## Serilog.Sinks.File (4.1.0)
+
+### Description
+Write Serilog events to a text file in plain or JSON format.
+
+### Declared License(s)
+  * Apache-2.0
+
+        Copyright 2021, Serilog.Sinks.File Contributors
+		
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+		
+		http://www.apache.org/licenses/LICENSE-2.0
+		
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		
+		See the License for the specific language governing permissions and limitations under the License.
+
+### Authors
+  * Serilog Contributors
+
+### Package Homepage
+  * https://serilog.net/
+
+---
+## Serilog.Extensions.Logging (4.0.1)
+
+### Description
+Low-level Serilog provider for Microsoft.Extensions.Logging
+
+### Declared License(s)
+  * Apache-2.0
+
+        Copyright 2021, Serilog.Extensions.Logging Contributors
+		
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+		
+		http://www.apache.org/licenses/LICENSE-2.0
+		
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		
+		See the License for the specific language governing permissions and limitations under the License.
+
+### Authors
+  * Microsoft, Serilog Contributors
+
+### Package Homepage
+  * https://github.com/serilog/serilog-extensions-logging
+
+---
+## Enterwell.Clients.Wpf.Notifications
+
+### Description
+Enterwell WPF Notifications library
+
+### Declared License(s)
+  * MIT
+
+        Copyright (c) 2017 Enterwell
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+
+### Authors
+  * Enterwell d.o.o.
+
+### Package Homepage
+  * https://github.com/Enterwell/Wpf.Notifications
+
+---

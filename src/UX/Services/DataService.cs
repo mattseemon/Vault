@@ -1,39 +1,36 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
 using Seemon.Vault.Core.Contracts.Services;
-using Seemon.Vault.Core.Models;
-using System;
 using System.Collections;
-using System.IO;
 
 namespace Seemon.Vault.Services
 {
     public class DataService : IDataService
     {
+        private readonly ILogger<IDataService> _logger;
         private readonly IFileService _fileService;
-        private readonly ApplicationConfig _appConfig;
-        private readonly string _localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private readonly IApplicationInfoService _appInfo;
+        private readonly string _settingsFilename = "vault.settings.json";
 
-        public DataService(IFileService fileService, IOptions<ApplicationConfig> appConfig)
+        public DataService(IFileService fileService, IApplicationInfoService appInfo, ILogger<IDataService> logger)
         {
+            _logger = logger;
             _fileService = fileService;
-            _appConfig = appConfig.Value;
+            _appInfo = appInfo;
         }
 
         public void PersistData()
         {
+            _logger.LogInformation($"Saving settings to file : {_settingsFilename}");
             if (App.Current.Properties != null)
             {
-                var foldePath = Path.Combine(_localAppData, _appConfig.ConfigPath);
-                var filename = _appConfig.ConfigFile;
-                _fileService.Save(foldePath, filename, App.Current.Properties);
+                _fileService.Save(_appInfo.GetDataPath(), _settingsFilename, App.Current.Properties);
             }
         }
 
         public void RestoreData()
         {
-            var folderPath = Path.Combine(_localAppData, _appConfig.ConfigPath);
-            var filename = _appConfig.ConfigFile;
-            var properties = _fileService.Read<IDictionary>(folderPath, filename);
+            _logger.LogInformation($"Loading settings from file : {_settingsFilename}");
+            var properties = _fileService.Read<IDictionary>(_appInfo.GetDataPath(), _settingsFilename);
             if (properties != null)
             {
                 foreach (DictionaryEntry property in properties)

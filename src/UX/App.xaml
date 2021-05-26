@@ -1,22 +1,25 @@
 ﻿<Application x:Class="Seemon.Vault.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Seemon.Vault"
-             Startup="OnStartup" Exit="OnExit" DispatcherUnhandledException="OnDispatcherUnhandledException">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Seemon.Vault"
+    DispatcherUnhandledException="OnDispatcherUnhandledException" Exit="OnExit"
+    Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+                <!--  MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive!  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
 
-                <!-- Theme setting -->
+                <!--  Theme setting  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
 
-                <!-- Application Assets -->
+                <!--  Application Assets  -->
                 <ResourceDictionary x:Name="Logo" Source="pack://application:,,,/Assets/Vault.Icon.xaml" />
                 <ResourceDictionary x:Name="TBI" Source="pack://application:,,,/Assets/Vault.TaskbarIcon.xaml" />
                 <ResourceDictionary x:Name="TabControl" Source="pack://application:,,,/Assets/Vault.TabControl.xaml" />
+                <ResourceDictionary x:Name="Markdown" Source="pack://application:,,,/Assets/Vault.Markdown.xaml" />
+                <ResourceDictionary x:Name="Notification" Source="pack://application:,,,/Controls/Notifications/Themes/Vault.Notification.Custom.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

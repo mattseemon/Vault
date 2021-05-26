@@ -1,5 +1,6 @@
 ﻿using ControlzEx.Theming;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Extensions.Logging;
 using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
@@ -7,6 +8,7 @@ using Seemon.Vault.Core.Contracts.Views;
 using Seemon.Vault.Core.Models;
 using Seemon.Vault.Helpers;
 using Seemon.Vault.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,6 +26,7 @@ namespace Seemon.Vault.ViewModels
             public Brush ColorBrush { get; set; }
         }
 
+        private readonly ILogger<IViewModel> _logger;
         private readonly ISettingsService _settingsService;
         private readonly IThemeSelectorService _themeSelectorService;
         private readonly IWindowManagerService _windowManagerService;
@@ -43,21 +46,21 @@ namespace Seemon.Vault.ViewModels
 
         private ICommand _selectionChangedCommand;
         private ICommand _checkedCommand;
-
         private ICommand _newProfileCommand;
         private ICommand _editProfileCommand;
         private ICommand _deleteProfilesCommand;
         private ICommand _defaultProfileCommand;
 
-        public SettingsViewModel(ISettingsService settingsService, IThemeSelectorService themeSelectorService, 
-            IWindowManagerService windowManagerService, ITaskbarIconService taskbarIconService, 
-            ISystemService systemService)
+        public SettingsViewModel(ISettingsService settingsService, IThemeSelectorService themeSelectorService,
+            IWindowManagerService windowManagerService, ITaskbarIconService taskbarIconService,
+            ISystemService systemService, ILogger<IViewModel> logger)
         {
             _settingsService = settingsService;
             _themeSelectorService = themeSelectorService;
             _windowManagerService = windowManagerService;
             _taskbarIconService = taskbarIconService;
             _systemService = systemService;
+            _logger = logger;
         }
 
         public ICommand SelectionChangedCommand => _selectionChangedCommand ??= RegisterCommand<string>(OnSelectionChanged);
@@ -130,11 +133,14 @@ namespace Seemon.Vault.ViewModels
         {
             AccentColors = new List<AccentColorData>();
             AccentColors.Add(new AccentColorData { Name = "System", ColorBrush = SystemParameters.WindowGlassBrush });
-            AccentColors.AddRange(ThemeManager.Current.Themes
-                .GroupBy(x => x.ColorScheme)
-                .OrderBy(a => a.Key)
-                .Select(a => new AccentColorData { Name = a.Key, ColorBrush = a.First().ShowcaseBrush })
+
+            AccentColors.AddRange(typeof(Brushes)
+                .GetProperties()
+                .Where(prop => typeof(Brush).IsAssignableFrom(prop.PropertyType))
+                .Select(prop => new AccentColorData { Name = prop.Name, ColorBrush = prop.GetValue(null) as Brush })
                 .ToList());
+
+            AccentColors.RemoveAll(x => x.Name is "White" or "Transparent");
 
             Theme = _settingsService.Get(Constants.SETTINGS_APPLICATION_THEME, ApplicationTheme.Default);
             System = _settingsService.Get(Constants.SETTINGS_SYSTEM, SystemSettings.Default);
@@ -162,6 +168,7 @@ namespace Seemon.Vault.ViewModels
 
         private void OnChecked(string parameter)
         {
+
             switch (parameter)
             {
                 case "TaskbarIcon":
@@ -171,7 +178,14 @@ namespace Seemon.Vault.ViewModels
                         _taskbarIconService.Destroy();
                     break;
                 case "StartWithWindows":
-                    _systemService.SetAutoStartWithWindows(System.StartWithWindows);
+                    try
+                    {
+                        _systemService.SetAutoStartWithWindows(System.StartWithWindows);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Could not update application startup.");
+                    }
                     break;
                 case "AlwaysOnTop":
                     _windowManagerService.MainWindow.Topmost = System.AlwaysOnTop;
@@ -215,7 +229,7 @@ namespace Seemon.Vault.ViewModels
             }
         }
 
-        private bool CanDeleteProfiles() => SelectedProfiles.Count() > 0;
+        private bool CanDeleteProfiles() => SelectedProfiles.Any();
 
         private async void OnDeleteProfiles()
         {

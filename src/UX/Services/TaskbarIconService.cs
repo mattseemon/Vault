@@ -1,4 +1,5 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Extensions.Logging;
 using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Models;
@@ -14,13 +15,15 @@ namespace Seemon.Vault.Services
     {
         private readonly IWindowManagerService _windowManagerService;
         private readonly ISettingsService _settingsService;
+        private readonly ILogger<ITaskbarIconService> _logger;
 
         private WindowState _storedWindowState = WindowState.Normal;
 
-        public TaskbarIconService(IWindowManagerService windowManagerService, ISettingsService settingsService)
+        public TaskbarIconService(IWindowManagerService windowManagerService, ISettingsService settingsService, ILogger<ITaskbarIconService> logger)
         {
             _windowManagerService = windowManagerService;
             _settingsService = settingsService;
+            _logger = logger;
         }
 
         private TaskbarIcon _taskbarIcon;
@@ -28,6 +31,7 @@ namespace Seemon.Vault.Services
         {
             if (_taskbarIcon != null)
             {
+                _logger.LogInformation("Destroying TaskbarIcon");
                 if (_windowManagerService.MainWindow != null)
                 {
                     _windowManagerService.MainWindow.StateChanged -= OnWindowStateChanged;
@@ -50,6 +54,7 @@ namespace Seemon.Vault.Services
 
                 if (_taskbarIcon == null)
                 {
+                    _logger.LogInformation("Initializing TaskbarIcon");
                     _taskbarIcon = new TaskbarIcon
                     {
                         DataContext = App.GetService<TaskbarIconViewModel>(),
