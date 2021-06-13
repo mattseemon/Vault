@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\..\..\Downloads\bccrypto-csharp-1.8.10-bin\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\..\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
   </ItemGroup>
 
