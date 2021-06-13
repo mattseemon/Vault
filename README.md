@@ -76,6 +76,7 @@ VAULT was developed using the below tools and technologies.
 [Serilog.Extensions.Logging](https://github.com/serilog/serilog-extensions-logging)|3.0.1
 [Enterwell.Clients.Wpf.Notifications](https://github.com/Enterwell/Wpf.Notifications)|*
 [LiteDB](https://www.litedb.org/)|5.0.10
+[Portable.BouncyCastle](https://www.bouncycastle.org/csharp/)|1.8.10
 
 \* Instead of using the published packages, either included the code as-is or a modified version of the same.
 

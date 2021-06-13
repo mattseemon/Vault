@@ -34,13 +34,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\lib\BouncyCastle.Crypto.dll</HintPath>
-      <Private>true</Private>
-    </Reference>
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
   </ItemGroup>
 
 </Project>

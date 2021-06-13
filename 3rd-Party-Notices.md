@@ -22,6 +22,7 @@ Package|Licenses
 [Serilog.Extensions.Logging (3.0.1)](#serilogextensionslogging-301)|Apache-2.0
 [Enterwell.Clients.Wpf.Notifications](#enterwellclientswpfnotifications)|MIT
 [LiteDB (5.0.10)](#litedb-5010)|MIT
+[Portable.BouncyCastle (1.8.10)](#portablebouncyCastle-1810)|MIT
 
 ---
 
@@ -391,7 +392,7 @@ Source code and extensive sample application available at http://www.hardcodet.n
 ### Package Homepage
   * https://github.com/hardcodet/wpf-notifyicon
 
-  ---
+---
 
 ## Markdig.Wpf (0.5.0.1)
 
@@ -519,6 +520,7 @@ Asynchronous sink wrapper for Serilog.
   * https://serilog.net/
 
 ---
+
 ## Serilog.Sinks.File (4.1.0)
 
 ### Description
@@ -548,6 +550,7 @@ Write Serilog events to a text file in plain or JSON format.
   * https://serilog.net/
 
 ---
+
 ## Serilog.Extensions.Logging (4.0.1)
 
 ### Description
@@ -577,6 +580,7 @@ Low-level Serilog provider for Microsoft.Extensions.Logging
   * https://github.com/serilog/serilog-extensions-logging
 
 ---
+
 ## Enterwell.Clients.Wpf.Notifications
 
 ### Description
@@ -646,5 +650,41 @@ LiteDB - A lightweight embedded .NET NoSQL document store in a single datafile.
 
 ### Package Homepage
   * https://www.litedb.org/
+
+---
+
+## Portable.BouncyCastle (1.8.10)
+
+### Description
+BouncyCastle portable version with support for .NET 4, .NET Standard 2.0.
+
+### Declared License(s)
+  * MIT
+
+        Copyright (c) 2000 - 2017 The Legion of the Bouncy Castle Inc. (http://www.bouncycastle.org)
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy 
+        of this software and associated documentation files (the "Software"), to deal 
+        in the Software without restriction, including without limitation the rights 
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+        copies of the Software, and to permit persons to whom the Software is 
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all 
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+        SOFTWARE.
+
+### Authors
+  * Claire Novotny
+
+### Package Homepage
+  * https://www.bouncycastle.org/csharp/
 
 ---
