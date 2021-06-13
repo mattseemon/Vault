@@ -12,15 +12,13 @@ namespace Seemon.Vault.Services
 {
     public class NotificationService : INotificationService
     {
-        private INotificationMessageManager _manager;
+        public INotificationMessageManager Manager { get; }
 
-        public INotificationMessageManager Manager => _manager;
-
-        public NotificationService() => _manager = new NotificationMessageManager();
+        public NotificationService() => Manager = new NotificationMessageManager();
 
         public NotificationMessageBuilder Default()
         {
-            var builder = _manager.CreateMessage()
+            var builder = Manager.CreateMessage()
                 .Background("#333")
                 .Animates(true);
 

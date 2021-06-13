@@ -1,8 +1,10 @@
-﻿namespace Seemon.Vault.Core.Contracts.Views
+﻿using Seemon.Vault.Core.Contracts.ViewModels;
+
+namespace Seemon.Vault.Core.Contracts.Views
 {
     public interface IWindow : ICloseable
     {
-        object ViewModel { get; }
+        IViewModel ViewModel { get; }
 
         void Show();
 

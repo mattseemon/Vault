@@ -9,7 +9,7 @@ namespace Seemon.Vault.Core.Contracts.Services
 
         bool CanGoBack { get; }
 
-        void Initialize(Frame sheelFrame);
+        void Initialize(Frame shellFrame);
 
         bool NavigateTo(string pageKey, object parameter = null, bool clearNavigation = false);
 

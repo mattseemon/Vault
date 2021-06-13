@@ -117,120 +117,130 @@
                         BorderBrush="Transparent" BorderThickness="5" SnapsToDevicePixels="True"
                         UseLayoutRounding="True">
                         <!--  Outer Grid  -->
-                        <Grid x:Name="outerGrid">
-                            <Grid.Resources>
-                                <!--  Accent Button Style  -->
-                                <Style BasedOn="{StaticResource NotificationMessageButtonStyle}" TargetType="{x:Type local:NotificationMessageButton}">
-                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NotificationMessage}}, Path=ButtonAccentBrush}" />
-                                </Style>
-                                <!--  Accent Badge Style  -->
-                                <Style
-                                    x:Key="NotificationBadgeAccentStyle"
-                                    BasedOn="{StaticResource NotificationBadgeBaseStyle}"
-                                    TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NotificationMessage}}, Path=BadgeAccentBrush}" />
-                                </Style>
-                            </Grid.Resources>
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <!--  Additional Content - Outer Grid  -->
-                            <ContentControl x:Name="additionalContentTop" Content="{TemplateBinding AdditionalContentTop}"
-                                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                            <ContentControl x:Name="additionalContentBottom" Content="{TemplateBinding AdditionalContentBottom}"
-                                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                            <ContentControl x:Name="additionalContentLeft" Content="{TemplateBinding AdditionalContentLeft}"
-                                Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                            <ContentControl x:Name="additionalContentRight" Content="{TemplateBinding AdditionalContentRight}"
-                                Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                            <ContentControl x:Name="additionalContentCenter" Content="{TemplateBinding AdditionalContentMain}"
-                                Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-
-                            <!--  Inner Grid  -->
-                            <Grid x:Name="innerGrid"
-                                Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
-                                VerticalAlignment="Top">
+                            <Border
+                                Grid.Row="0" Grid.Column="0" Width="5"
+                                Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NotificationMessage}}, Path=ButtonAccentBrush}" />
+                            <Grid x:Name="outerGrid"
+                                Grid.Row="0" Grid.Column="1">
+                                <Grid.Resources>
+                                    <!--  Accent Button Style  -->
+                                    <Style BasedOn="{StaticResource NotificationMessageButtonStyle}" TargetType="{x:Type local:NotificationMessageButton}">
+                                        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NotificationMessage}}, Path=ButtonAccentBrush}" />
+                                    </Style>
+                                    <!--  Accent Badge Style  -->
+                                    <Style
+                                        x:Key="NotificationBadgeAccentStyle"
+                                        BasedOn="{StaticResource NotificationBadgeBaseStyle}"
+                                        TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NotificationMessage}}, Path=BadgeAccentBrush}" />
+                                    </Style>
+                                </Grid.Resources>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <!--  Badge Grid  -->
-                                <Grid x:Name="badgeGrid"
-                                    Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <!--  Additional Content - Over Badge  -->
-                                    <ContentControl x:Name="additionalContentOverBadge" Content="{TemplateBinding AdditionalContentOverBadge}"
-                                        Grid.Row="1"
-                                        Style="{StaticResource NotificationAdditionalContentOverBadgeStyle}" />
-                                    <!--  Badge  -->
-                                    <TextBlock Text="{TemplateBinding BadgeText}"
-                                        Grid.Row="2" Margin="10"
-                                        Style="{StaticResource NotificationBadgeAccentStyle}"
-                                        Visibility="{TemplateBinding BadgeVisibility}" />
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!--  Additional Content - Outer Grid  -->
+                                <ContentControl x:Name="additionalContentTop" Content="{TemplateBinding AdditionalContentTop}"
+                                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+                                <ContentControl x:Name="additionalContentBottom" Content="{TemplateBinding AdditionalContentBottom}"
+                                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+                                <ContentControl x:Name="additionalContentLeft" Content="{TemplateBinding AdditionalContentLeft}"
+                                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+                                <ContentControl x:Name="additionalContentRight" Content="{TemplateBinding AdditionalContentRight}"
+                                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+                                <ContentControl x:Name="additionalContentCenter" Content="{TemplateBinding AdditionalContentMain}"
+                                    Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+
+                                <!--  Inner Grid  -->
+                                <Grid x:Name="innerGrid"
+                                    Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <!--  Badge Grid  -->
+                                    <Grid x:Name="badgeGrid"
+                                        Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <!--  Additional Content - Over Badge  -->
+                                        <ContentControl x:Name="additionalContentOverBadge" Content="{TemplateBinding AdditionalContentOverBadge}"
+                                            Grid.Row="1"
+                                            Style="{StaticResource NotificationAdditionalContentOverBadgeStyle}" />
+                                        <!--  Badge  -->
+                                        <TextBlock Text="{TemplateBinding BadgeText}"
+                                            Grid.Row="2" Margin="10"
+                                            Style="{StaticResource NotificationBadgeAccentStyle}"
+                                            Visibility="{TemplateBinding BadgeVisibility}" />
+                                    </Grid>
+                                    <!--  Text Grid  -->
+                                    <Grid x:Name="textGrid"
+                                        Grid.Column="1" Margin="0,10" HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <!--  Header and Message  -->
+                                        <TextBlock x:Name="headerTextBlock" Text="{TemplateBinding Header}"
+                                            Grid.Row="0"
+                                            Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"
+                                            Style="{StaticResource NotificationHeaderTextStyle}"
+                                            Visibility="{TemplateBinding HeaderVisibility}" />
+                                        <TextBlock x:Name="messageTextBlock" Text="{TemplateBinding Message}"
+                                            Grid.Row="1"
+                                            Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"
+                                            Style="{StaticResource NotificationMessageTextStyle}"
+                                            Visibility="{TemplateBinding MessageVisibility}" />
+                                    </Grid>
                                 </Grid>
-                                <!--  Text Grid  -->
-                                <Grid x:Name="textGrid"
-                                    Grid.Column="1" Margin="0,10" HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <!--  Header and Message  -->
-                                    <TextBlock x:Name="headerTextBlock" Text="{TemplateBinding Header}"
-                                        Grid.Row="0"
-                                        Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"
-                                        Style="{StaticResource NotificationHeaderTextStyle}"
-                                        Visibility="{TemplateBinding HeaderVisibility}" />
-                                    <TextBlock x:Name="messageTextBlock" Text="{TemplateBinding Message}"
-                                        Grid.Row="1"
-                                        Foreground="{DynamicResource MahApps.Brushes.Badged.Foreground}"
-                                        Style="{StaticResource NotificationMessageTextStyle}"
-                                        Visibility="{TemplateBinding MessageVisibility}" />
-                                </Grid>
+
+                                <!--  Buttons  -->
+                                <ItemsControl
+                                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Padding="5,0,5,5"
+                                    HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                                    ItemsSource="{TemplateBinding Buttons}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="local:INotificationMessageButton">
+                                            <Button Content="{Binding Content}" IsEnabled="{Binding IsEnabled}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <!--  Overlay Content  -->
+                                <ContentControl x:Name="overlayContainer" Content="{TemplateBinding OverlayContent}"
+                                    Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4"
+                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             </Grid>
-
-                            <!--  Buttons  -->
-                            <ItemsControl
-                                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Padding="5,0,5,5"
-                                HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                                ItemsSource="{TemplateBinding Buttons}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="local:INotificationMessageButton">
-                                        <Button Content="{Binding Content}" IsEnabled="{Binding IsEnabled}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                            <!--  Overlay Content  -->
-                            <ContentControl x:Name="overlayContainer" Content="{TemplateBinding OverlayContent}"
-                                Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4"
-                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                         </Grid>
                     </Border>
                 </ControlTemplate>

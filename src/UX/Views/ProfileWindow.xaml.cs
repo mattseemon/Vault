@@ -1,4 +1,4 @@
-﻿using Seemon.Vault.Helpers;
+﻿using Seemon.Vault.Helpers.Views;
 using Seemon.Vault.ViewModels;
 
 namespace Seemon.Vault.Views

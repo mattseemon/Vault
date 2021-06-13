@@ -46,7 +46,7 @@ namespace Seemon.Vault.Core.Models
             var infos = themeInfo.Split(".");
             if (infos.Length != 2)
             {
-                throw new ArgumentNullException("theme", "Invalid theme data.");
+                throw new ArgumentNullException(nameof(themeInfo), "Invalid theme data.");
             }
             Enum.TryParse(infos[0], out ThemeBase themeBase);
 

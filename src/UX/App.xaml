@@ -9,13 +9,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--  MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive!  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />-->
 
                 <!--  Theme setting  -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
 
                 <!--  Application Assets  -->
                 <ResourceDictionary x:Name="Logo" Source="pack://application:,,,/Assets/Vault.Icon.xaml" />
+                <ResourceDictionary x:Name="Fonts" Source="pack://application:,,,/Assets/Vault.Fonts.xaml" />
                 <ResourceDictionary x:Name="TBI" Source="pack://application:,,,/Assets/Vault.TaskbarIcon.xaml" />
                 <ResourceDictionary x:Name="TabControl" Source="pack://application:,,,/Assets/Vault.TabControl.xaml" />
                 <ResourceDictionary x:Name="Markdown" Source="pack://application:,,,/Assets/Vault.Markdown.xaml" />

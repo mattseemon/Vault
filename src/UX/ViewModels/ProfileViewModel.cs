@@ -1,8 +1,7 @@
 ﻿using Seemon.Vault.Core.Contracts.Services;
-using Seemon.Vault.Core.Contracts.Views;
 using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
 using Seemon.Vault.Helpers.Validators;
+using Seemon.Vault.Helpers.ViewModels;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Input;
@@ -62,15 +61,7 @@ namespace Seemon.Vault.ViewModels
 
         private bool CanSubmit() => !HasErrors && !string.IsNullOrEmpty(_name) && !string.IsNullOrEmpty(_location);
 
-        private void OnSubmit()
-        {
-            IWindow window = _windowManagerService.GetWindow(PageKey);
-
-            if (window != null)
-            {
-                window.CloseDialog(true);
-            }
-        }
+        private void OnSubmit() => _windowManagerService.GetWindow(PageKey)?.CloseDialog(true);
 
         private void OnBrowse()
         {

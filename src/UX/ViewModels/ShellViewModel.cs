@@ -2,8 +2,9 @@
 using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Controls.Notifications;
 using Seemon.Vault.Core.Contracts.Services;
-using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Core.Helpers;
+using Seemon.Vault.Core.Models.Settings;
+using Seemon.Vault.Helpers.ViewModels;
 using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,26 +21,13 @@ namespace Seemon.Vault.ViewModels
         private readonly IWindowManagerService _windowManagerService;
 
         private string _pageTitle = null;
-        private RelayCommand _goBackCommand;
+        private ICommand _goBackCommand;
         private ICommand _loadedCommand;
         private ICommand _unloadedCommand;
         private ICommand _closingCommand;
-        private ICommand _showAbout;
-        private ICommand _showSettings;
-
-        public RelayCommand GoBackCommand => _goBackCommand ??= new RelayCommand(OnGoBack, CanGoBack);
-
-        public ICommand LoadedCommand => _loadedCommand ??= new RelayCommand(OnLoaded);
-
-        public ICommand UnloadedCommand => _unloadedCommand ??= new RelayCommand(OnUnloaded);
-
-        public ICommand ClosingCommand => _closingCommand ??= new RelayCommand<object>(OnClosing);
-
-        public ICommand ShowAboutCommand => _showAbout ??= new RelayCommand(OnShowAbout);
-
-        public ICommand ShowSettingsCommand => _showSettings ??= new RelayCommand(OnShowSettings);
-
-        public INotificationMessageManager Manager => _notificationService.Manager;
+        private ICommand _showAboutCommand;
+        private ICommand _showSettingsCommand;
+        private ICommand _showKeyStoreCommand;
 
         public ShellViewModel(INavigationService navigationService, IApplicationInfoService applicationInfoService,
             ITaskbarIconService taskbarIconService, ISettingsService settingsService, INotificationService notificationService,
@@ -52,6 +40,22 @@ namespace Seemon.Vault.ViewModels
             _notificationService = notificationService;
             _windowManagerService = windowManagerService;
         }
+
+        public ICommand GoBackCommand => _goBackCommand ??= RegisterCommand(OnGoBack, CanGoBack);
+
+        public ICommand LoadedCommand => _loadedCommand ??= RegisterCommand(OnLoaded);
+
+        public ICommand UnloadedCommand => _unloadedCommand ??= RegisterCommand(OnUnloaded);
+
+        public ICommand ClosingCommand => _closingCommand ??= RegisterCommand<object>(OnClosing);
+
+        public ICommand ShowAboutCommand => _showAboutCommand ??= RegisterCommand(OnShowAbout);
+
+        public ICommand ShowSettingsCommand => _showSettingsCommand ??= RegisterCommand(OnShowSettings);
+
+        public ICommand ShowKeyStoreCommand => _showKeyStoreCommand ??= RegisterCommand(OnShowKeyStore);
+
+        public INotificationMessageManager Manager => _notificationService.Manager;
 
         public string PageTitle
         {
@@ -84,9 +88,11 @@ namespace Seemon.Vault.ViewModels
 
         private void OnShowSettings() => _navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
 
+        private void OnShowKeyStore() => _navigationService.NavigateTo(typeof(KeyStoreViewModel).FullName);
+
         private void OnNavigated(object sender, string e)
         {
-            GoBackCommand.NotifyCanExecuteChanged();
+            (GoBackCommand as RelayCommand).NotifyCanExecuteChanged();
 
             Frame frame = (Frame)sender;
             PageTitle = frame.Content is Page page ? page.Title : string.Empty;

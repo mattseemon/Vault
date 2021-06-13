@@ -10,13 +10,6 @@ namespace Seemon.Vault.Core.Services
 {
     public class FileService : IFileService
     {
-
-        public T Read<T>(string folderPath, string filename)
-        {
-            var path = Path.Combine(folderPath, filename);
-            return Read<T>(path);
-        }
-
         public T Read<T>(string filePath)
         {
             if (File.Exists(filePath))
@@ -27,6 +20,10 @@ namespace Seemon.Vault.Core.Services
 
             return default;
         }
+
+        public Stream Open(string path) => !File.Exists(path)
+                ? throw new ArgumentException($"Invalid value for path", nameof(path))
+                : File.Open(path, FileMode.Open);
 
         public void Save<T>(string folderPath, string filename, T content)
         {
@@ -41,7 +38,7 @@ namespace Seemon.Vault.Core.Services
 
         public void Delete(string folderPath, string filename)
         {
-            if (filename != null && File.Exists(Path.Combine(folderPath, filename)))
+            if (filename is not null && File.Exists(Path.Combine(folderPath, filename)))
             {
                 File.Delete(Path.Combine(folderPath, filename));
             }
@@ -76,12 +73,10 @@ namespace Seemon.Vault.Core.Services
                 {
                     Directory.CreateDirectory(path.Replace(source, destination));
                 }
-
                 foreach (string path in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
                 {
                     File.Copy(path, path.Replace(source, destination), true);
                 }
-
                 return true;
             }
             catch (Exception ex)
@@ -89,5 +84,7 @@ namespace Seemon.Vault.Core.Services
                 throw new VaultException($"Copy file to destination {destination} failed.", ex);
             }
         }
+
+        
     }
 }

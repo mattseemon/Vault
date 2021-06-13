@@ -27,10 +27,7 @@ namespace Seemon.Vault
     {
         private IHost _host;
 
-        public static T GetService<T>() where T : class
-        {
-            return ((App)Current)._host.Services.GetService(typeof(T)) as T;
-        }
+        public static T GetService<T>() where T : class => ((App)Current)._host.Services.GetService(typeof(T)) as T;
 
         public App()
         {
@@ -85,6 +82,10 @@ namespace Seemon.Vault
             services.AddSingleton<ISettingsService, SettingsService>();
             services.AddSingleton<IApplicationInfoService, ApplicationInfoService>();
             services.AddSingleton<ICommandLineService, CommandLineService>();
+            services.AddSingleton<IPasswordCacheService, PasswordCacheService>();
+            services.AddSingleton<IEncryptionService, EncryptionService>();
+            services.AddSingleton<IKeyStoreService, KeyStoreService>();
+            services.AddSingleton<IPasswordService, PasswordService>();
 
             // Services
             services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
@@ -95,6 +96,7 @@ namespace Seemon.Vault
             services.AddSingleton<IHttpService, HttpService>();
             services.AddSingleton<IUpdateService, UpdateService>();
             services.AddSingleton<INotificationService, NotificationService>();
+            services.AddSingleton<IPGPService, PGPService>();
 
             // Views and ViewModels
             services.AddSingleton<IShellWindow, ShellWindow>();
@@ -117,6 +119,24 @@ namespace Seemon.Vault
 
             services.AddTransient<ReleaseNotesViewModel>();
             services.AddTransient<ReleaseNotesWindow>();
+
+            services.AddTransient<PasswordViewModel>();
+            services.AddTransient<PasswordWindow>();
+
+            services.AddTransient<NewPasswordViewModel>();
+            services.AddTransient<NewPasswordWindow>();
+
+            services.AddTransient<KeyStoreViewModel>();
+            services.AddTransient<KeyStorePage>();
+
+            services.AddTransient<GenerateKeyPairViewModel>();
+            services.AddTransient<GenerateKeyPairWindow>();
+
+            services.AddTransient<ChangePasswordViewModel>();
+            services.AddTransient<ChangePasswordWindow>();
+
+            services.AddTransient<KeyPairViewModel>();
+            services.AddTransient<KeyPairPage>();
 
             services.AddTransient<TaskbarIconViewModel>();
 

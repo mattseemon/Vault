@@ -1,4 +1,6 @@
-﻿namespace Seemon.Vault.Core.Contracts.Services
+﻿using System.IO;
+
+namespace Seemon.Vault.Core.Contracts.Services
 {
     public interface IFileService
     {
@@ -11,9 +13,9 @@
             SHA512
         }
 
-        T Read<T>(string folderPath, string filename);
-
         T Read<T>(string filePath);
+
+        Stream Open(string path);
 
         void Save<T>(string folderPath, string filename, T content);
 

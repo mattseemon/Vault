@@ -1,9 +1,4 @@
-﻿using Seemon.Vault.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Seemon.Vault.Helpers.ViewModels;
 
 namespace Seemon.Vault.ViewModels
 {
@@ -16,9 +11,6 @@ namespace Seemon.Vault.ViewModels
             get => _mdContent; set => SetProperty(ref _mdContent, value);
         }
 
-        public override void SetModel(object model)
-        {
-            MDContents = model.ToString();
-        }
+        public override void SetModel(object model) => MDContents = model.ToString();
     }
 }

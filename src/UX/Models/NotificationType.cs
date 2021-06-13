@@ -6,6 +6,7 @@
         Info,
         Warning,
         Error,
-        Update
+        Update,
+        Success
     }
 }

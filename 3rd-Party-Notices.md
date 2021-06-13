@@ -11,6 +11,7 @@ Package|Licenses
 [MahApps.Metro.IconPacks.Material (4.8.0)](#mahappsmetroiconpacksmaterial-480)|MIT
 [Microsoft.Extensions.Hosting (5.0.0)](#microsoftextensionshosting-500)|MIT
 [Microsoft.Extensions.Logging (5.0.0)](#microsoftextensionslogging-500)|MIT
+[Microsoft.Extensions.Caching.Memory (5.0.0)](#microsoftextensionscachingmemory-500)|MIT
 [Microsoft.Toolkit.Mvvm (7.0.2)](#microsofttoolkitmvvm-702)|MIT
 [Hardcodet.NotifyIcon.Wpf (1.1.0)](#hardcodetnotifyiconwpf-110)|CPOL
 [Markdig.Wpf (0.5.0.1)](#markdigwpf-0501)|MIT
@@ -20,10 +21,11 @@ Package|Licenses
 [Serilog.Sinks.File (4.1.0)](#serilogsinksfile-410)|Apache-2.0
 [Serilog.Extensions.Logging (3.0.1)](#serilogextensionslogging-301)|Apache-2.0
 [Enterwell.Clients.Wpf.Notifications](#enterwellclientswpfnotifications)|MIT
+[LiteDB (5.0.10)](#litedb-5010)|MIT
 
 ---
 
-## **Newtonsoft.Json (13.0.1)**
+## Newtonsoft.Json (13.0.1)
 
 ### Description
 Json.NET is a popular high-performance JSON framework for .NET
@@ -60,7 +62,7 @@ Json.NET is a popular high-performance JSON framework for .NET
 
 ---
 
-## **MahApps.Metro (2.4.5)**
+## MahApps.Metro (2.4.5)
 
 ### Description
 The goal of MahApps.Metro is to allow devs to quickly and easily cobble together a "Metro" or "Modern UI" for their WPF4+ apps, with minimal effort.
@@ -98,7 +100,7 @@ The goal of MahApps.Metro is to allow devs to quickly and easily cobble together
 
 ---
 
-## **MahApps.Metro.IconPacks.Material (4.8.0)**
+## MahApps.Metro.IconPacks.Material (4.8.0)
 
 ### Description
 IconPacks for stylish awesome WPF or UWP apps.
@@ -136,7 +138,7 @@ IconPacks for stylish awesome WPF or UWP apps.
 
 ---
 
-## **Microsoft.Extensions.Hosting (5.0.0)**
+## Microsoft.Extensions.Hosting (5.0.0)
 
 ### Description
 Hosting and startup infrastructures for applications.
@@ -176,7 +178,7 @@ Hosting and startup infrastructures for applications.
 
 ---
 
-## **Microsoft.Extensions.Logging (5.0.0)**
+## Microsoft.Extensions.Logging (5.0.0)
 
 ### Description
 Logging infrastructure default implementation for Microsoft.Extensions.Logging. 
@@ -216,7 +218,47 @@ Logging infrastructure default implementation for Microsoft.Extensions.Logging.
 
 ---
 
-## **Microsoft.Toolkit.Mvvm (7.0.2)**
+## Microsoft.Extensions.Caching.Memory (5.0.0)
+
+### Description
+In-memory cache implementation of Microsoft.Extensions.Caching.Memory.IMemoryCache. 
+
+### Declared License(s)
+  * MIT
+
+        The MIT License (MIT)
+
+        Copyright (c) .NET Foundation and Contributors
+
+        All rights reserved.
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+
+### Authors
+  * Microsoft
+
+### Package Homepage
+  * https://github.com/dotnet/runtime
+
+---
+
+## Microsoft.Toolkit.Mvvm (7.0.2)
 
 ### Description
 This package includes a .NET Standard MVVM library with helpers such as:
@@ -351,7 +393,7 @@ Source code and extensive sample application available at http://www.hardcodet.n
 
   ---
 
-## **Markdig.Wpf (0.5.0.1)**
+## Markdig.Wpf (0.5.0.1)
 
 ### Description
 A WPF library for lunet-io/markdig
@@ -387,6 +429,7 @@ A WPF library for lunet-io/markdig
   * https://github.com/Kryptos-FR/markdig.wpf
 
 ---
+
 ## SeriLog (2.10.0)
 
 ### Description
@@ -416,6 +459,7 @@ Simple .NET logging with fully-structured events
   * https://serilog.net/
 
 ---
+
 ## Serilog.Formatting.Compact (1.1.0)
 
 ### Description
@@ -445,6 +489,7 @@ A simple, compact JSON-based event format for Serilog.
   * https://github.com/serilog/serilog-formatting-compact
 
 ---
+
 ## Serilog.Sinks.Async (1.4.0)
 
 ### Description
@@ -565,5 +610,41 @@ Enterwell WPF Notifications library
 
 ### Package Homepage
   * https://github.com/Enterwell/Wpf.Notifications
+
+---
+
+## LiteDB (5.0.10)
+
+### Description
+LiteDB - A lightweight embedded .NET NoSQL document store in a single datafile.
+
+### Declared License(s)
+  * MIT
+
+        Copyright (c) 2014-2020 Mauricio David
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+
+### Authors
+  * Maurício David
+
+### Package Homepage
+  * https://www.litedb.org/
 
 ---

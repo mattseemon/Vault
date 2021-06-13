@@ -1,8 +1,8 @@
 ﻿using ControlzEx.Theming;
 using Microsoft.Extensions.Logging;
 using Seemon.Vault.Core.Contracts.Services;
+using Seemon.Vault.Core.Helpers;
 using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
 using System.Windows;
 using System.Windows.Media;
 

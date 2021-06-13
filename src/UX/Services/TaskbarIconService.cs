@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Services;
-using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Core.Helpers;
+using Seemon.Vault.Core.Models.Settings;
 using Seemon.Vault.ViewModels;
 using System;
 using System.Windows;
@@ -18,6 +18,7 @@ namespace Seemon.Vault.Services
         private readonly ILogger<ITaskbarIconService> _logger;
 
         private WindowState _storedWindowState = WindowState.Normal;
+        private TaskbarIcon _taskbarIcon;
 
         public TaskbarIconService(IWindowManagerService windowManagerService, ISettingsService settingsService, ILogger<ITaskbarIconService> logger)
         {
@@ -26,13 +27,12 @@ namespace Seemon.Vault.Services
             _logger = logger;
         }
 
-        private TaskbarIcon _taskbarIcon;
         public void Destroy()
         {
-            if (_taskbarIcon != null)
+            if (_taskbarIcon is not null)
             {
                 _logger.LogInformation("Destroying TaskbarIcon");
-                if (_windowManagerService.MainWindow != null)
+                if (_windowManagerService.MainWindow is not null)
                 {
                     _windowManagerService.MainWindow.StateChanged -= OnWindowStateChanged;
                 }
@@ -47,12 +47,12 @@ namespace Seemon.Vault.Services
 
             if (settings.ShowVaultInNotificationArea)
             {
-                if (_windowManagerService.MainWindow == null)
+                if (_windowManagerService.MainWindow is null)
                 {
                     return;
                 }
 
-                if (_taskbarIcon == null)
+                if (_taskbarIcon is null)
                 {
                     _logger.LogInformation("Initializing TaskbarIcon");
                     _taskbarIcon = new TaskbarIcon
@@ -70,7 +70,7 @@ namespace Seemon.Vault.Services
 
         public void Show()
         {
-            if (_windowManagerService.MainWindow != null)
+            if (_windowManagerService.MainWindow is not null)
             {
                 _windowManagerService.MainWindow.Show();
                 _windowManagerService.MainWindow.WindowState = _storedWindowState;
@@ -80,7 +80,7 @@ namespace Seemon.Vault.Services
 
         public void Hide()
         {
-            if (_windowManagerService.MainWindow != null)
+            if (_windowManagerService.MainWindow is not null)
             {
                 _windowManagerService.MainWindow.Hide();
             }
