@@ -1,5 +1,5 @@
 ﻿using Seemon.Vault.Core.Contracts.Services;
-using Seemon.Vault.Core.Models;
+using Seemon.Vault.Core.Models.Updater;
 using System;
 using System.IO;
 using System.Reflection;
@@ -32,7 +32,7 @@ namespace Seemon.Vault.Services
             _isPreRelease = version.IsPreRelease;
 
             var path = Path.Combine(_executablePath, "data");
-            
+
             _dataPath = Directory.Exists(path)
                 ? path
                 : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GetApplicationIdentifier());
@@ -61,13 +61,15 @@ namespace Seemon.Vault.Services
 
         public string GetLogPath() => Path.Combine(_dataPath, "logs");
 
+        public string GetKeyStorePath() => Path.Combine(_dataPath, "keystore.db");
+
         public string GetApplicationExecutablePath() => _executablePath;
 
         private T GetAssemblyAttribute<T>() where T : Attribute
         {
-            object[] attributes = _assembly.GetCustomAttributes(typeof(T), true);
+            var attributes = _assembly.GetCustomAttributes(typeof(T), true);
 
-            return attributes == null || attributes.Length == 0 ? null : (T)attributes[0];
+            return attributes is null || attributes.Length == 0 ? null : (T)attributes[0];
         }
     }
 }

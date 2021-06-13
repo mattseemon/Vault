@@ -1,12 +1,14 @@
-﻿using ControlzEx.Theming;
-using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Extensions.Logging;
 using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
 using Seemon.Vault.Core.Contracts.Views;
+using Seemon.Vault.Core.Helpers;
 using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Core.Models.Settings;
+using Seemon.Vault.Helpers.ViewModels;
+using Seemon.Vault.Helpers.Views;
 using Seemon.Vault.Views;
 using System;
 using System.Collections.Generic;
@@ -173,9 +175,13 @@ namespace Seemon.Vault.ViewModels
             {
                 case "TaskbarIcon":
                     if (System.ShowVaultInNotificationArea)
+                    {
                         _taskbarIconService.Initialize();
+                    }
                     else
+                    {
                         _taskbarIconService.Destroy();
+                    }
                     break;
                 case "StartWithWindows":
                     try
@@ -195,12 +201,11 @@ namespace Seemon.Vault.ViewModels
 
         private void OnNewProfile()
         {
-            IWindow window = App.GetService<ProfileWindow>();
+            var window = App.GetService<ProfileWindow>() as IWindow;
             var response = window.ShowDialog(App.GetService<IShellWindow>());
             if (response.HasValue && response.Value)
             {
-                ProfileViewModel vm = window.ViewModel as ProfileViewModel;
-
+                var vm = window.ViewModel as ProfileViewModel;
                 var profile = new Profile
                 {
                     Name = vm.Name,
@@ -215,9 +220,8 @@ namespace Seemon.Vault.ViewModels
 
         private void OnEditProfile()
         {
-            IWindow window = App.GetService<ProfileWindow>();
-
-            ProfileViewModel vm = window.ViewModel as ProfileViewModel;
+            var window = App.GetService<ProfileWindow>() as IWindow;
+            var vm = window.ViewModel as ProfileViewModel;
             vm.SetModel(SelectedProfile);
 
             var response = window.ShowDialog(App.GetService<IShellWindow>());
@@ -248,7 +252,7 @@ namespace Seemon.Vault.ViewModels
             }
         }
 
-        private bool CanDefaultProfile() => SelectedProfiles.Count() == 1;
+        private bool CanDefaultProfile() => SelectedProfiles.Count() == 1 && SelectedProfile is not null && !SelectedProfile.IsDefault;
 
         private void OnDefaultProfile()
         {
@@ -256,6 +260,7 @@ namespace Seemon.Vault.ViewModels
             {
                 profile.IsDefault = (profile == SelectedProfile);
             }
+            RaiseCommandsCanExecute();
         }
     }
 }

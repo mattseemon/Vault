@@ -2,8 +2,8 @@
 {
     public interface IDataService
     {
-        void RestoreData();
-
         void PersistData();
+
+        void RestoreData();
     }
 }

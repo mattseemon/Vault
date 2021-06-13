@@ -1,5 +1,6 @@
 ﻿using Seemon.Vault.Contracts.Services;
 using Seemon.Vault.Controls.Notifications;
+using Seemon.Vault.Core.Helpers;
 using Seemon.Vault.Models;
 
 namespace Seemon.Vault.Helpers.Extensions
@@ -25,6 +26,10 @@ namespace Seemon.Vault.Helpers.Extensions
                 case NotificationType.Update:
                     builder.SetBadge("UPDATE");
                     builder.SetAccent(Constants.NOTIFICATION_COLOR_UPDATE);
+                    break;
+                case NotificationType.Success:
+                    builder.SetBadge("SUCCESS");
+                    builder.SetAccent(Constants.NOTIFICATION_COLOR_SUCCESS);
                     break;
                 case NotificationType.None:
                     break;

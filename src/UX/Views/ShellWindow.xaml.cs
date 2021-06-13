@@ -1,5 +1,5 @@
 ﻿using Seemon.Vault.Core.Contracts.Views;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Helpers.Views;
 using Seemon.Vault.ViewModels;
 using System.Windows.Controls;
 

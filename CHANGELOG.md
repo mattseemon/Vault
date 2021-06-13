@@ -100,3 +100,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 	2. Updated WindowManagerService to include methods to save and restore WindowPosition.
 	3. Lots of minor tweaks and code clean up.
 	4. Updated CHANGELOG.md, 3rd-Party-Notices.md, README.md.
+
+## [0.2.17-alpha] - 2021-06-13
+
+### Summary
+	1. Added OpenPGP Support
+		a. Implemented a local datastore to store and manage OpenPGP Key Pairs. Uses [LiteDB](https://www.litedb.org/) as the backend.
+		b. Implemented a Password management service to
+			- provides a consistent way to display GUI's for creating, entering, changing and verifying passwords. 
+			- allow for caching and retrieving passwords. 
+		c. Added OpenPGP Support with the following capabilities. Uses [Bouncy Castle library](https://www.bouncycastle.org/csharp/index.html).
+			- Create a new OpenPGP Key Pair. Support only RSA Encryption at the moment. Support for EC planned.
+			- Import an existing OpenPGP Key Pair.
+			- Export OpenPGP Key Pairs.
+			- Change OpenPGP key pair passphrase.
+		d. Implemented an AES based encryption service to encrypt/decrypt data during data store operations.
+
+### Added
+	1. Added the following services.
+		a. EncryptionService - Service class to provide AES encryption support.
+		b. PasswordService - Service class to centrally manage display of Password UX.
+		3. PasswordCacheService - Service class which implements a password caching mechanism with expiration.
+		4. PGPService - Service class which allows to create and manager OpenPGP public-private key cryptography.
+		5. KeyStoreService - Service class which implements the management of PGP Key Store.
+	2. Models
+		- StoreCredentials, KeyPairInfo, AsciiArmoredKey - Represents used by the KeyStoreService
+		- CompressionAlgorithm, EncryptionAlgorithm, EncryptionKeyFlags, EncryptionKeyPair, EncryptionKeyPairUser, EncryptionKeyRing, HashAlgorithm, KeyGenParams, SymmetricKeyAlgorithm - used by the PGPService.
+	3. Windows/Pages
+		- NewPasswordWindow, ChangePasswordWindow, PasswordWindow - allows users to create, change and enter passwords.
+		- KeyStorePage - allows users to manage OpenPGP key pairs.
+		- KeyPairPage - allows users to view the properties of a specific OpenPGP key pair.
+	4. Additional extensions, converters and other helper classes added.
+
+### Changed
+	1. Major restructuring of model classes for better organization 
+	2. Modified services to include OpenPGP support.
+	3. Updated CHANGELOG.md, 3rd-Party-Notices.md, README.md.
+	4. Bumped version to 0.2

@@ -3,7 +3,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
 using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Helpers.ViewModels;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,11 +32,7 @@ namespace Seemon.Vault.ViewModels
 
         public ICommand OpenInBrowserCommand => _openInBrowserCommand ??= new RelayCommand<string>(OnOpenInBrowser);
 
-        private void OnOpenInBrowser(string parameter)
-        {
-            var url = _appUrls[parameter];
-            _systemService.OpenInWebBrowser(url);
-        }
+        private void OnOpenInBrowser(string parameter) => _systemService.OpenInWebBrowser(_appUrls[parameter]);
 
         public void OnNavigateTo(object parameter) => Lines = File.ReadLines(@".\LICENSE").ToList();
 

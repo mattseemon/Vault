@@ -1,4 +1,4 @@
-﻿using Seemon.Vault.Helpers.Extensions;
+﻿using Seemon.Vault.Core.Helpers.Extensions;
 using Seemon.Vault.Models;
 using System;
 using System.Collections.Generic;
@@ -18,11 +18,9 @@ namespace Seemon.Vault.Helpers.Converters
 
         public override object ProvideValue(IServiceProvider serviceProvider) => this;
 
-        private IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type t)
-        {
-            return !t.IsEnum
+        private IEnumerable<ValueDescription> GetAllValuesAndDescriptions(Type t) 
+            => !t.IsEnum
                 ? throw new ArgumentException($"{nameof(t)} must be an enum type")
                 : Enum.GetValues(t).Cast<Enum>().Select((e) => new ValueDescription() { Value = e, Description = e.GetDescription() }).ToList();
-        }
     }
 }

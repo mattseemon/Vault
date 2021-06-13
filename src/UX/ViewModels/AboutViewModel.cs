@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.Toolkit.Mvvm.Input;
-using Seemon.Vault.Contracts.Services;
-using Seemon.Vault.Controls.Notifications;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
-using Seemon.Vault.Core.Contracts.Views;
 using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
-using Seemon.Vault.Views;
+using Seemon.Vault.Helpers.ViewModels;
 using System;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Seemon.Vault.ViewModels
@@ -21,7 +16,7 @@ namespace Seemon.Vault.ViewModels
         private readonly ISystemService _systemService;
         private readonly INavigationService _navigationService;
         private readonly IUpdateService _updateService;
-        
+
 
         private ICommand _openInBrowserCommand;
         private ICommand _showLicenseCommand;
@@ -105,7 +100,7 @@ namespace Seemon.Vault.ViewModels
         {
             var difference = DateTime.Now - _updateService.LastChecked.Value;
 
-            if (DateTime.Now.Day - _updateService.LastChecked.Value.Day > 1)
+            if ((DateTime.Now - _updateService.LastChecked.Value).Days > 1)
             {
                 return $"on {_updateService.LastChecked:dd MMM}, at {_updateService.LastChecked:h:mm tt}";
             }

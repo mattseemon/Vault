@@ -1,4 +1,4 @@
-﻿using Seemon.Vault.Core.Models;
+﻿using Seemon.Vault.Core.Models.Updater;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

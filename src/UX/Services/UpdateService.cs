@@ -8,8 +8,10 @@ using Seemon.Vault.Controls.Notifications;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Views;
 using Seemon.Vault.Core.Exceptions;
+using Seemon.Vault.Core.Helpers;
 using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Core.Models.Settings;
+using Seemon.Vault.Core.Models.Updater;
 using Seemon.Vault.Helpers.Extensions;
 using Seemon.Vault.ViewModels;
 using Seemon.Vault.Views;
@@ -69,10 +71,9 @@ namespace Seemon.Vault.Services
 
         public GitHubVersion UpgradeVersion => _upgradeVersion;
 
-        public bool IsBusy 
+        public bool IsBusy
         {
-            get => _isBusy;
-            set => SetProperty(ref _isBusy, value);
+            get => _isBusy; set => SetProperty(ref _isBusy, value);
         }
 
         public string UpdateMessage { get; private set; }
@@ -112,7 +113,7 @@ namespace Seemon.Vault.Services
                     }
                 }
 
-                if (_release == null)
+                if (_release is null)
                 {
                     _logger.LogInformation("You have the latest version");
                     return false;
@@ -157,11 +158,10 @@ namespace Seemon.Vault.Services
                 dowloadedPaths.Add(path);
             }
 
-            string hashFilePath = dowloadedPaths.FirstOrDefault(x => x.EndsWith(".json"));
-            string updateFilePath = dowloadedPaths.FirstOrDefault(x => x.EndsWith(".zip"));
+            var hashFilePath = dowloadedPaths.FirstOrDefault(x => x.EndsWith(".json"));
+            var updateFilePath = dowloadedPaths.FirstOrDefault(x => x.EndsWith(".zip"));
 
             bool? hashVerified = null;
-
             if (!string.IsNullOrEmpty(hashFilePath))
             {
                 hashVerified = false;
@@ -186,7 +186,7 @@ namespace Seemon.Vault.Services
 
                 var files = Directory.GetFiles(extractionPath, "vault.exe", SearchOption.AllDirectories);
 
-                var updatePath = (new FileInfo(files[0])).DirectoryName;
+                var updatePath = new FileInfo(files[0]).DirectoryName;
 
                 if (Directory.Exists(Path.Combine(applicationPath, "data")))
                 {
@@ -278,7 +278,7 @@ namespace Seemon.Vault.Services
             Application.Current.Dispatcher.BeginInvoke(() =>
             {
                 UpdateMessage = message;
-                if (_downloadNotificationMessage != null)
+                if (_downloadNotificationMessage is not null)
                 {
                     _downloadNotificationMessage.Message = UpdateMessage;
                     if (_downloadNotificationMessage.OverlayContent is ProgressBar progressBar)
@@ -296,7 +296,7 @@ namespace Seemon.Vault.Services
                 UpdateMessage = $"Downloading update... {value}%";
                 UpdateProgress = value;
 
-                if (_downloadNotificationMessage != null)
+                if (_downloadNotificationMessage is not null)
                 {
                     _downloadNotificationMessage.Message = UpdateMessage;
                     if (_downloadNotificationMessage.OverlayContent is ProgressBar progressBar)

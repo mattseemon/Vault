@@ -21,6 +21,8 @@ namespace Seemon.Vault.Services
             Configure<AboutViewModel, AboutPage>();
             Configure<SettingsViewModel, SettingsPage>();
             Configure<LicenseViewModel, LicensePage>();
+            Configure<KeyStoreViewModel, KeyStorePage>();
+            Configure<KeyPairViewModel, KeyPairPage>();
         }
 
         public Page GetPage(string key)

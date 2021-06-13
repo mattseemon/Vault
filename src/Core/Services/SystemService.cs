@@ -30,7 +30,7 @@ namespace Seemon.Vault.Core.Services
         public void SetAutoStartWithWindows(bool enable)
         {
             using RegistryKey key = Registry.CurrentUser.OpenSubKey(_autoStartKey, true);
-            if (key == null)
+            if (key is null)
             {
                 throw new Exception("Could not set application to auto start with windows.");
             }
@@ -42,7 +42,7 @@ namespace Seemon.Vault.Core.Services
             {
                 key.SetValue(identifier, $"\"{executablePath}\"");
             }
-            else if (!enable && key.GetValue(identifier, null) != null)
+            else if (!enable && key.GetValue(identifier, null) is not null)
             {
                 key.DeleteValue(identifier, false);
             }
@@ -59,7 +59,7 @@ namespace Seemon.Vault.Core.Services
                 InitialDirectory = initialDirectory
             };
 
-            return dialog.ShowDialog() == DialogResult.OK ? dialog.FileNames : (new string[] { });
+            return dialog.ShowDialog() == DialogResult.OK ? dialog.FileNames : Array.Empty<string>();
         }
 
         public string ShowFolderDialog(string description, string initialPath, bool showNewFolderButton)

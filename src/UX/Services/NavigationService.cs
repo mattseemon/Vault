@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
+using Seemon.Vault.Core.Contracts.Views;
 using Seemon.Vault.Helpers.Extensions;
 using System;
 using System.Windows.Controls;
@@ -26,12 +27,12 @@ namespace Seemon.Vault.Services
 
         public bool CanGoBack => _frame.CanGoBack;
 
-        public void Initialize(Frame sheelFrame)
+        public void Initialize(Frame shellFrame)
         {
             _logger.LogInformation($"Starting application navigation service.");
-            if (_frame == null)
+            if (_frame is null)
             {
-                _frame = sheelFrame;
+                _frame = shellFrame;
                 _frame.Navigated += OnNavigated;
             }
         }
@@ -39,7 +40,7 @@ namespace Seemon.Vault.Services
         public void UnsubscribeNavigation()
         {
             _logger.LogInformation($"Stopping application navigation service.");
-            if (_frame != null)
+            if (_frame is not null)
             {
                 _frame.Navigated -= OnNavigated;
                 _frame = null;
@@ -67,7 +68,7 @@ namespace Seemon.Vault.Services
             {
                 var pageType = _pageService.GetPageType(pageKey);
 
-                if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
+                if (_frame.Content?.GetType() != pageType || (parameter is not null && !parameter.Equals(_lastParameterUsed)))
                 {
                     _frame.Tag = clearNavigation;
                     var page = _pageService.GetPage(pageKey);
@@ -98,7 +99,7 @@ namespace Seemon.Vault.Services
         {
             if (sender is Frame frame)
             {
-                bool clearNavigation = (bool)frame.Tag;
+                var clearNavigation = (bool)frame.Tag;
                 if (clearNavigation)
                 {
                     frame.CleanNavigation();

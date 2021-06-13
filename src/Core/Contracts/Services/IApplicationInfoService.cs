@@ -21,5 +21,7 @@
         public string GetDataPath();
 
         public string GetLogPath();
+
+        public string GetKeyStorePath();
     }
 }

@@ -1,7 +1,6 @@
-﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
-using Seemon.Vault.Core.Contracts.Services;
+﻿using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.ViewModels;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Helpers.ViewModels;
 
 namespace Seemon.Vault.ViewModels
 {

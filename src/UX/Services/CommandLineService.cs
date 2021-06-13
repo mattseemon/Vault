@@ -40,7 +40,7 @@ namespace Seemon.Vault.Services
                 {
                     updateMessage = $"Application updated to version {_applicationInfoService.GetVersion()}.";
                     _logger.LogInformation(updateMessage);
-                    _notificationService.ShowMessage(Models.NotificationType.Update, updateMessage, "Application Update - Success");
+                    _notificationService.ShowMessage(Models.NotificationType.Success, updateMessage, "Application Update - Success");
                 }
                 else
                 {

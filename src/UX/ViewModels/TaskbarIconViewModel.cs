@@ -1,5 +1,5 @@
 ﻿using Seemon.Vault.Contracts.Services;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Helpers.ViewModels;
 using System.Windows.Input;
 
 namespace Seemon.Vault.ViewModels

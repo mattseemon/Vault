@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Seemon.Vault.Services
 {
@@ -24,6 +25,8 @@ namespace Seemon.Vault.Services
         private readonly ITaskbarIconService _taskbarIconService;
         private readonly IWindowManagerService _windowManagerService;
         private readonly ICommandLineService _commandLineService;
+        private readonly IKeyStoreService _keyStoreService;
+        private readonly IApplicationInfoService _applicationInfoService;
 
         private IShellWindow _shellWindow;
         private bool _isInitialized;
@@ -31,7 +34,8 @@ namespace Seemon.Vault.Services
         public ApplicationHostService(IServiceProvider serviceProvider, IEnumerable<IActivationHandler> activationHandlers,
             IDataService dataService, IThemeSelectorService themeSelectorService, INavigationService navigationService,
             ITaskbarIconService taskbarIconService, IWindowManagerService windowManagerService,
-            ILogger<IHostedService> logger, ICommandLineService commandLineService)
+            ILogger<IHostedService> logger, ICommandLineService commandLineService,
+            IKeyStoreService keyStoreService, IApplicationInfoService applicationInfoService)
         {
             _serviceProvider = serviceProvider;
             _activationHandlers = activationHandlers;
@@ -42,6 +46,8 @@ namespace Seemon.Vault.Services
             _windowManagerService = windowManagerService;
             _logger = logger;
             _commandLineService = commandLineService;
+            _keyStoreService = keyStoreService;
+            _applicationInfoService = applicationInfoService;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -86,6 +92,10 @@ namespace Seemon.Vault.Services
                 _taskbarIconService.Initialize();
                 _windowManagerService.RestoreWindowSettings();
 
+                if (!_keyStoreService.InitializeKeyStore(_applicationInfoService.GetKeyStorePath()))
+                {
+                    Application.Current.Shutdown();
+                }
                 await Task.CompletedTask;
             }
         }
@@ -93,14 +103,14 @@ namespace Seemon.Vault.Services
         private async Task HandleActivationAsync()
         {
             var activationHandler = _activationHandlers.FirstOrDefault(h => h.CanHandle());
-            if (activationHandler != null)
+            if (activationHandler is not null)
             {
                 await activationHandler.HandleAsync();
             }
 
             await Task.CompletedTask;
 
-            if (!App.Current.Windows.OfType<IShellWindow>().Any())
+            if (!Application.Current.Windows.OfType<IShellWindow>().Any())
             {
                 _shellWindow = _serviceProvider.GetService(typeof(IShellWindow)) as IShellWindow;
                 _navigationService.Initialize(_shellWindow.GetNavigationFrame());

@@ -1,7 +1,7 @@
 ﻿using Seemon.Vault.Core.Contracts.Services;
 using Seemon.Vault.Core.Contracts.Views;
-using Seemon.Vault.Core.Models;
-using Seemon.Vault.Helpers;
+using Seemon.Vault.Core.Helpers;
+using Seemon.Vault.Core.Models.Settings;
 using Seemon.Vault.Helpers.Extensions;
 using System.Windows;
 
@@ -11,10 +11,7 @@ namespace Seemon.Vault.Services
     {
         private readonly ISettingsService _settingsService;
 
-        public WindowManagerService(ISettingsService settingsService)
-        {
-            _settingsService = settingsService;
-        }
+        public WindowManagerService(ISettingsService settingsService) => _settingsService = settingsService;
 
         public Window MainWindow => App.Current.MainWindow;
 
@@ -37,7 +34,7 @@ namespace Seemon.Vault.Services
 
             var windowSettings = _settingsService.Get<WindowSettings>(Constants.SETTINGS_WINDOWS);
 
-            if(windowSettings != null)
+            if (windowSettings is not null)
             {
                 MainWindow.Top = windowSettings.WindowTop;
                 MainWindow.Left = windowSettings.WindowLeft;
@@ -64,12 +61,12 @@ namespace Seemon.Vault.Services
 
         private void ResizeToFit()
         {
-            if(MainWindow.Height > SystemParameters.VirtualScreenHeight)
+            if (MainWindow.Height > SystemParameters.VirtualScreenHeight)
             {
                 MainWindow.Height = SystemParameters.VirtualScreenHeight;
             }
 
-            if(MainWindow.Width > SystemParameters.VirtualScreenWidth)
+            if (MainWindow.Width > SystemParameters.VirtualScreenWidth)
             {
                 MainWindow.Width = SystemParameters.VirtualScreenWidth;
             }
@@ -77,22 +74,22 @@ namespace Seemon.Vault.Services
 
         private void MoveIntoView()
         {
-            if(MainWindow.Top + MainWindow.Height / 2 > SystemParameters.VirtualScreenHeight)
+            if (MainWindow.Top + MainWindow.Height / 2 > SystemParameters.VirtualScreenHeight)
             {
                 MainWindow.Top = SystemParameters.VirtualScreenHeight - MainWindow.Height;
             }
 
-            if(MainWindow.Left + MainWindow.Width / 2 > SystemParameters.VirtualScreenWidth)
+            if (MainWindow.Left + MainWindow.Width / 2 > SystemParameters.VirtualScreenWidth)
             {
                 MainWindow.Left = SystemParameters.VirtualScreenWidth - MainWindow.Width;
             }
 
-            if(MainWindow.Top < 0)
+            if (MainWindow.Top < 0)
             {
                 MainWindow.Top = 0;
             }
 
-            if(MainWindow.Left < 0)
+            if (MainWindow.Left < 0)
             {
                 MainWindow.Left = 0;
             }
