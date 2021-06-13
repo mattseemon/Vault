@@ -42,8 +42,4 @@
     </Reference>
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&quot;$(DevEnvDir)TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(SolutionDir)\Versioning\AssemblyInfo.tt&quot;" />
-  </Target>
-
 </Project>
